@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ import java.util.List;
 @ToString
 @DynamicInsert
 @DynamicUpdate
-public class GoodsVO {
+public class Goods {
 
     @Id
     @Column
@@ -49,11 +50,10 @@ public class GoodsVO {
 
     private LocalDateTime goods_regTime; // 등록일
 
-    @Column(nullable = false)
-    private int goods_category; // 카테고리
+    @OneToMany(mappedBy="goods", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<GoodsCategory> category_list = new ArrayList<>(); // 카테고리
 
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="goods_id")
-    private List<ImageVO> goods_images; //이미지
+    @OneToMany(mappedBy="goods", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<GoodsImage> image_list = new ArrayList<>();; //이미지
 
 }

@@ -5,14 +5,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @ToString
-public class ImageVO {
+public class Image {
 
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int image_id;		// 이미지 아이디
 
@@ -22,4 +25,6 @@ public class ImageVO {
     private String fileName;	// 파일명
     private String fileType;	// 이미지 구분(상세, 썸네일, 설명)
 
+    @OneToMany(mappedBy="image")
+    private List<GoodsImage> goods_list = new ArrayList<>();
 }

@@ -6,19 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class CategoryVO {
+public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long category_id;
 
     @Column(nullable = false)
     private String category_name;
+
+    @OneToMany(mappedBy="category")
+    private List<GoodsCategory> goods_list = new ArrayList<>();
+
 
 }
