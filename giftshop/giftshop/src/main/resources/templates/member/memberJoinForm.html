@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<!--CSS 추가-->
+<th:block layout:fragment="css">
+  <style>
+    .fieldError{
+      color:#bd2130;
+    }
+  </style>
+  <link rel="stylesheet" th:href="@{/css/reset.css}">
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/join.css}">
+</th:block>
+
+<!--JS 추가-->
+<th:block layout:fragment="script">
+  <script th:inline="javascript">
+    $(document).ready(function (){
+      let errorMessage = [[${errorMessage}]];
+      if(errorMessage != null){
+        alert(errorMessage);
+      }
+    });
+
+    //이메일 선택시 readonly
+    $(".email_list").change(function(){
+      var temp = $(this).find("option:selected");
+      if ($(this).val() == "etc") {
+        $("#sel_email").val('');
+        $("#sel_email").prop("readonly",false);
+
+      } else {
+        $("#sel_email").val(temp.val());
+        $("#sel_email").prop("readonly",true);
+      }
+    });
+
+    //배송지 일치
+    $("#chk_same").click(function(){
+      var temp = [];
+      if($(this).is(":checked")){
+        $("#order1 > ol > li > input").each(function(){
+          temp.push($(this).val());
+        });
+
+        $("#order2 > ol > li > input").each(function(index){
+          $(this).val(temp[index]);
+          console.log($(this).val());
+        });
+        $("#order2 > ol > li > input").prop("readonly",true);
+      } else {
+        $("#order2 > ol > li > input").prop("readonly",false);
+      }
+    });
+  </script>
+</th:block>
+
+<div layout:fragment="content">
+  <div id="join_wrap">
+    <h3><span>○○○ 회원가입하기</span></h3>
+    <p><span>○○○</span>에 오신 여러분을 진심으로 환영합니다.</p>
+
+    <form action="/members/join" role="form" method="post"
+          th:object="${memberFormDTO}">
+
+      <div id="user_info">
+        <p>기본 정보</p>
+        <div class="form_wrap1">
+          <div class="line">
+            <label for="u_name" class="l_con">이름</label>
+            <p class="r_con"><input type="text" th:field="*{name}" id="u_name" autocomplete="off"></p>
+          </div><!--line 이름-->
+          <div class="line">
+            <label for="u_id" class="l_con">이메일</label>
+            <p class="r_con"><input type="text" th:field="*{email}" id="u_id" autocomplete="off"></p>
+            <p class="dup_chk"><button onclick="return false">중복 확인</button></p>
+          </div> <!--line 아이디-->
+          <div class="line">
+            <label for="u_pwd" class="l_con">비밀번호</label>
+            <p class="r_con"><input type="password" th:field="*{password}" id="u_pwd" autocomplete="off"></p>
+          </div>
+          <div class="line">
+            <label for="u_pwd" class="l_con">비밀번호 확인</label>
+            <p class="r_con"><input type="password" id="u_pwd_chk" autocomplete="off"></p>
+          </div><!--line 패스워드-->
+          <div class="line">
+            <label for="u_tel1" class="l_con">연락처</label>
+            <div class="r_con">
+              <p class="mobile">
+                <select>
+                  <option>선택</option>
+                  <option value="SKT">SKT</option>
+                  <option value="KT">KT</option>
+                  <option value="LG">LG U+</option>
+                </select>
+              </p>
+              <p class="tel1"><input type="tel" id="u_tel1" title="전화번호 앞"></p>
+              <span class="tel2"> - </span>
+              <p class="tel3"><input type="tel" id="u_tel2" title="전화번호 중간"></p>
+              <span class="tel4"> - </span>
+              <p class="tel5"><input type="tel" id="u_tel3" title="전화번호 뒷"></p>
+            </div>
+          </div><!--line 연락처-->
+        </div><!--form_wrap1-->
+      </div><!--user_info-->
+
+      <div id="delivery_info">
+        <p>배송지 정보</p>
+        <div class="form_wrap2">
+          <div class="line2">
+            <div>
+              <label for="chk_same"><strong>*</strong> 주문자 정보와 동일<span class="chk_box"></span></label>
+              <input type="checkbox" id="chk_same">
+            </div>
+            <fieldset id="l_order">
+              <legend>주문자 정보</legend>
+              <ol>
+                <li><label for="l_recipient">이름</label><input type="text" class="order_t" id="l_recipient" required></li>
+                <li><label for="l_tel">연락처</label><input type="tel" class="order_t" id="l_tel" required></li>
+                <li><label for="l_home">우편번호</label><input type="text" class="order_t"  id="l_home" required><button class="search_btn">우편번호찾기</button></li><!--우편번호-->
+                <li><label for="l_add">상세 주소</label><input type="text" class="order_t" id="l_add" autocomplete="off" required></li><!--주소-->
+              </ol>
+            </fieldset>
+            <fieldset id="r_order">
+              <legend>기본 배송지 정보</legend>
+              <ol>
+                <li><label for="r_recipient">이름</label><input type="text" class="order_t" id="r_recipient" required></li>
+                <li><label for="r_tel">연락처</label><input type="tel" class="order_t" id="r_tel" required></li>
+                <li><label for="r_home">우편번호</label><input type="text" class="order_t" id="r_home" required><button class="search_btn">우편번호찾기</button></li><!--우편번호-->
+                <li><label for="r_add">상세 주소</label><input type="text" class="order_t" id="r_add" autocomplete="off" required></li><!--주소-->
+              </ol>
+            </fieldset>
+          </div><!--line 배송지입력-->
+        </div><!--form_wrap2-->
+      </div><!--wrap2-->
+      <p id="join_btn"><button>회원가입</button></p>
+    </form>
+  </div><!--join_wrap-->
+
+</div>
+</html>
