@@ -1,30 +1,31 @@
 package com.example.giftshop.goods.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
+@ToString
 public class Category {
 
     @Id
     @Column
-    private Long category_id;
+    private Long categoryId;
 
     @Column(nullable = false)
-    private String category_name;
+    private String categoryName;
 
     @OneToMany(mappedBy="category")
-    private List<GoodsCategory> goods_list = new ArrayList<>();
+    private List<GoodsCategory> goodsList = new ArrayList<>();
 
-
+    @Builder
+    public Category(Long categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
 }
