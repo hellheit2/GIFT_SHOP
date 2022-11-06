@@ -14,10 +14,10 @@ public class GoodsCategory {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "goodsId")
+    @JoinColumn(name = "goods_id")
     private Goods goods;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_id")
     private Category category;
 }

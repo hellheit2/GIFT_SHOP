@@ -23,7 +23,7 @@ public class Goods {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long goodsId; // 상품 번호
+    private Long id; // 상품 번호
 
     @Column(nullable = false, length = 50)
     private String goodsName; // 상품명
@@ -49,15 +49,15 @@ public class Goods {
 
     private LocalDateTime regTime; // 등록일
 
-/*    @OneToMany(mappedBy="goods", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="goods", cascade = CascadeType.ALL) //, fetch=FetchType.EAGER
     private List<GoodsCategory> categoryList = new ArrayList<>(); // 카테고리
 
-    @OneToMany(mappedBy="goods", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<GoodsImage> imageList = new ArrayList<>(); //이미지*/
+    @OneToMany(mappedBy="goods", cascade = CascadeType.ALL)
+    private List<GoodsImage> imageList = new ArrayList<>(); //이미지
 
     @Builder
-    public Goods(Long goodsId, String goodsName, int goodsPrice, int goodsSale, String goodsDetail, int goodsView, float goodsRating, GoodsSellStatus goodsSellStatus, LocalDateTime regTime) {
-        this.goodsId = goodsId;
+    public Goods(Long id, String goodsName, int goodsPrice, int goodsSale, String goodsDetail, int goodsView, float goodsRating, GoodsSellStatus goodsSellStatus, LocalDateTime regTime) {
+        this.id = id;
         this.goodsName = goodsName;
         this.goodsPrice = goodsPrice;
         this.goodsSale = goodsSale;

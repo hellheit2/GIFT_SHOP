@@ -48,11 +48,11 @@ class GoodsRepositoryTest {
         log.info(savedGoods.toString());
 
         Category category1 = Category.builder()
-                .categoryId(1L)
+                .id(1L)
                 .categoryName("카테고리1").build();
 
         Category category2 = Category.builder()
-                .categoryId(2L)
+                .id(2L)
                 .categoryName("카테고리2").build();
 
         Category savedCategory1 = categoryRepository.save(category1);

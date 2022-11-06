@@ -14,10 +14,10 @@ public class GoodsImage {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "goodsId")
+    @JoinColumn(name = "goods_id")
     private Goods goods;
 
     @ManyToOne
-    @JoinColumn(name = "imageId")
+    @JoinColumn(name = "image_id")
     private Image image;
 }

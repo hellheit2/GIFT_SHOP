@@ -15,17 +15,17 @@ public class Category {
 
     @Id
     @Column
-    private Long categoryId;
+    private Long id;
 
     @Column(nullable = false)
     private String categoryName;
 
-    @OneToMany(mappedBy="category")
+    @OneToMany(mappedBy="category", cascade = CascadeType.ALL)
     private List<GoodsCategory> goodsList = new ArrayList<>();
 
     @Builder
-    public Category(Long categoryId, String categoryName) {
-        this.categoryId = categoryId;
+    public Category(Long id, String categoryName) {
+        this.id = id;
         this.categoryName = categoryName;
     }
 }
