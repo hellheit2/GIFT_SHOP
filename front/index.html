@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>티젠(리뉴얼)_포트폴리오</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/teazen.ico">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/jquery.bxslider.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#top").load("header.html");
+            $("#bottom").load("bottom.html");
+            let bannerNum = 1;
+            function slide(n){
+                if(bannerNum==8){
+                    bannerNum = 1;
+                }
+                if(bannerNum==0){
+                    bannerNum = 7;
+                }
+                $(".btn_wrap button").removeClass("active");
+                $(".btn" + bannerNum).addClass("active");
+                $(".photo li").css({left:0}).stop().animate({left:"-1920px"},1000,function(){
+                    $(this).css("z-index","1");
+                });
+                $(".photo li.no" + bannerNum).css({left:"1920px"}).stop().animate({left:"0px"},1000,function(){
+                    $(this).css("z-index","2");
+                });
+            }
+
+            $(".btn").click(function(){
+                bannerNum = $(this).attr("data-n");
+                slide(bannerNum);
+
+            });
+
+            $(".next").click(function(){
+                clearInterval(banner);
+                bannerNum++;  
+                slide(bannerNum);
+                banner = setInterval(function(){
+                    bannerNum++;
+                    console.log(bannerNum);
+                    slide(bannerNum);
+                },3000);
+            });
+            $(".prev").click(function(){
+                clearInterval(banner);
+                bannerNum--;       
+                slide(bannerNum);
+                banner = setInterval(function(){
+                    bannerNum++;
+                    console.log(bannerNum);
+                    slide(bannerNum);
+                },3000);
+            });
+            
+            var banner = setInterval(function(){
+                bannerNum++;
+                console.log(bannerNum);
+                slide(bannerNum);
+            },3000);
+            
+
+        });
+        
+    </script>
+   
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <style>
+        #wrap{width:1920px;height:480px;margin:0 auto;position:relative;}
+        .photo{width:1920px;height:480px;position:relative;overflow:hidden;}
+        .photo li{width:1920px;height:480px;position:absolute;top:0;}
+        .photo li.no1{left:0px;z-index:1;}
+        .photo li.no2{left:1920px;}
+        .photo li.no3{left:1920px;}
+        .photo li.no4{left:1920px;}
+        .photo li.no5{left:1920px;}
+        .photo li.no6{left:1920px;}
+        .photo li.no7{left:1920px;}
+
+        .prev,.next{position:absolute;top:50%;transform:translate(0,-50%);cursor:pointer;z-index:10;width:50px;height:50px;font-size:30px;}
+        .prev{left:10px;}
+        .next{right:10px;}
+
+        .btn_wrap{position:absolute;left:50%;bottom:30px;transform:translate(-50%,0);z-index:10;width:200px;height:20px;}
+        .btn_wrap li{width:20px;height:20px;float:left;margin-left:10px;}
+        .btn_wrap li:first-child{margin-left:0;}
+        .btn_wrap li .btn{width:20px;height:20px;background-color:#eaeaea;cursor:pointer;border-radius:50%;box-shadow:2px 2px rgba(0,0,0,0.3);color:transparent;border:none;}
+        .btn_wrap li .active{background-color:#666666;}
+    </style>
+</head>
+
+<body><!---->
+    <div id="top">
+        
+    </div><!--top-->
+
+    <div class="section main_ad show">
+        <div id="wrap">
+            <ul class="photo">
+                <li class="no1"><img src="images/main/banner_01.jpg" alt="#" width="1920" height="480"></li>
+                <li class="no2"><img src="images/main/banner_02.jpg" alt="#" width="1920" height="480"></li>
+                <li class="no3"><img src="images/main/banner_03.jpg" alt="#" width="1920" height="480"></li>
+                <li class="no4"><img src="images/main/banner_04.jpg" alt="#" width="1920" height="480"></li>
+                <li class="no5"><img src="images/main/banner_05.jpg" alt="#" width="1920" height="480"></li>
+                <li class="no6"><img src="images/main/banner_06.jpg" alt="#" width="1920" height="480"></li>
+                <li class="no7"><img src="images/main/banner_07.jpg" alt="#" width="1920" height="480"></li>
+            </ul>
+            <p>
+                <button type="button" class="prev">&lt;</button>
+                <button type="button" class="next">&gt;</button>
+            </p>
+            <ul class="btn_wrap">
+                <li><button type="button" title="1번버튼" data-n="1" class="btn btn1 active">1</button></li>
+                <li><button type="button" title="2번버튼" data-n="2" class="btn btn2">2</button></li>
+                <li><button type="button" title="3번버튼" data-n="3" class="btn btn3">3</button></li>
+                <li><button type="button" title="4번버튼" data-n="4" class="btn btn4">4</button></li>
+                <li><button type="button" title="5번버튼" data-n="5" class="btn btn5">5</button></li>
+                <li><button type="button" title="6번버튼" data-n="6" class="btn btn6">6</button></li>
+                <li><button type="button" title="7번버튼" data-n="7" class="btn btn7">7</button></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section main_category">
+        <div class="contents">
+            <h2>티젠의 <b>핵심 제품</b><span>건강한 삶과 행복한 여유</span></h2>
+            <div class="con_wrap">
+                <div class="con">
+                    <div class="category_img">
+                        <img src="images/main/product/combucha.jpg" alt="기능성차" width="330" height="360">
+                        <ul>
+                            <li><a href="#">콤부차/유기농 새싹보리</a></li>
+                            <li><a href="#">기능성차</a></li>
+                            <li><a href="#">건강차</a></li>
+                            <li><a href="#">프리미엄티</a></li>
+                            <li><a href="#">티카페/캡슐티</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="category">제품</p>
+                        <p class="category_name">간편한 분말 스틱형<span>기능성차</span></p>
+                    </div> 
+                </div><!--con-->
+                <div class="con">
+                    <div>
+                        <p class="category">카페용 제품</p>
+                        <p class="category_name">Premium Mix Powder<span>프리미엄 파우더</span></p> 
+                    </div>
+                    <div class="category_img">
+                        <img src="images/main/product/premium_powder.jpg" alt="카페용 제품" width="330" height="360">
+                        <ul>
+                            <li><a href="#">프리믹스파우더</a></li>
+                            <li><a href="#">피라미드티백</a></li>
+                            <li><a href="#">잎차</a></li>
+                            <li><a href="#">차분말</a></li>
+                        </ul>
+                    </div>
+                </div><!--con-->
+                <div class="con">
+                    <div class="category_img">
+                        <img src="images/main/product/tea.jpg" alt="콤부차" width="330" height="360">
+                        <ul>
+                            <li><a href="#">차류</a></li>
+                            <li><a href="#">가향블렌딩차</a></li>
+                            <li><a href="#">허브차류</a></li>
+                            <li><a href="#">곡류 한방차</a></li>
+                            <li><a href="#">분말차류</a></li>
+                            <li><a href="#">차 추출분말</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="category">차원료</p>
+                        <p class="category_name">TEA<span>잎차</span></p>
+                    </div>
+                </div><!--con-->
+            </div><!--con_wrap-->
+        </div><!--contents-->
+    </div><!--section main_category-->
+    
+    
+    <div class="section main_hot">
+        <div class="hot_items">
+            <h2><b>핫이슈</b> 상품전<span>당신만을 위한 최고의 선택</span></h2>
+            
+            <ul class="product_tab">
+                <li><a href="#">신상품</a></li>
+                <li><a href="#">베스트</a></li>
+                <li><a href="#">이번 주 인기제품</a></li>
+            </ul><!--product_tab-->
+            
+            <ul class="product_list">
+                <li>
+                    <div class="description">
+                        <a href="#">
+                            <p class="prd_img"><img src="images/main/hot_items/special_pd1_saessak_s.jpg" alt="티젠 유기농 새싹보리 선물세트" width="275" height="275"></p>
+                            <p class="prd_txt">티젠 유기농 새싹보리 선물세트<span>국내산 유기농 새싹보리 100%</span></p>
+                        </a>
+                        <div class="percent">30<span>%</span></div>
+                    </div>
+                    <div class="prd_price">
+                        <p class="sale">할인가 : <span>25,200원</span></p>
+                        <p class="price">36,000원</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="description">
+                        <a href="#">
+                            <p class="prd_img"><img src="images/main/hot_items/special_pd2_comb_jamong_s.jpg" alt="티젠 자몽쏙 50스틱+보틀" width="275" height="275"></p>
+                            <p class="prd_txt">티젠 자몽쏙 50스틱+보틀<span>자몽을 통째로 갈아만든 자몽쏙!</span></p>
+                        </a>
+                        <div class="percent">26<span>%</span></div>
+                    </div>
+                    <div class="prd_price">
+                        <p class="sale">할인가 : <span>25,900원</span></p>
+                        <p class="price">35,000원</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="description">
+                        <a href="#">
+                            <p class="prd_img"><img src="images/main/hot_items/special_pd3_energytea_s.jpg" alt="티젠 에너지티 50스틱+보틀" width="275" height="275"></p>
+                            <p class="prd_txt">티젠 에너지티 50스틱+보틀<span>지치고 힘들 때! 티젠 에너지티</span></p>
+                        </a>
+                        <div class="percent">26<span>%</span></div>
+                    </div>
+                    <div class="prd_price">
+                        <p class="sale">할인가 : <span>25,900원</span></p>
+                        <p class="price">35,000원</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="description">
+                        <a href="#">
+                            <p class="prd_img"><img src="images/main/hot_items/special_pd4_comb_lemon_s.jpg" alt="티젠 콤부차 레몬 30스틱x2박스" width="275" height="275"></p>
+                            <p class="prd_txt">티젠 콤부차 레몬 30스틱x2박스<span>톡! 쏘는 과즙감의 달콤상큼 웰빙티</span></p>
+                        </a>
+                        <div class="percent">30<span>%</span></div>
+                    </div>
+                    <div class="prd_price">
+                        <p class="sale">할인가 : <span>30,900원</span></p>
+                        <p class="price">44,000원</p>
+                    </div>
+                </li>
+            </ul><!--product_list-->
+            
+        </div><!--hot_items-->    
+    </div><!--section main_hot-->
+    
+    <div class="section main_slogan">
+        <div class="slogan">
+           <div class="slogan_txt">
+               <p>Tea &amp; Health<br>Creator</p>
+               <p>
+                   <span>차</span><span>와</span><span> </span><span>건</span><span>강</span><span>한</span><span> </span><span>삶</span>
+               </p>
+               <p>정신없이 바쁜 하루를 사는 현대인들에게<br>차를 통해 몸과 마음에 깊은 편안함을 전하겠습니다.</p>
+               <p>언제나 고객의 건강과 삶의 행복한 여유를 제공하기 위해 노력하겠습니다.</p>
+               <ul class="link">
+                   <li><a href="#"><img src="images/main/slogan/icon_instagram.png" alt="인스타그램 아이콘" width="100" height="100">인스타그램</a></li>
+                   <li><a href="#"><img src="images/main/slogan/icon_youtube.png" alt="유튜브 아이콘" width="100" height="100">유튜브</a></li>
+                   <li><a href="#"><img src="images/main/slogan/icon_facebook.png" alt="페이스북 아이콘" width="100" height="100">페이스북</a></li>
+                   <li><a href="#"><img src="images/main/slogan/icon_blog.png" alt="블로그 아이콘" width="100" height="100">블로그</a></li>
+               </ul>
+               <p><img src="images/main/slogan/teazen_bg2.png" alt="티젠 슬로건 찻잔 배경" width="400" height="280"></p>
+           </div>
+           <p class="slogan_img"><img src="images/main/slogan/slogan_img.png" alt="슬로건이미지_찻잎" width="500" height="465"></p>
+        </div>
+    </div>
+    
+    <div class="section main_recipe">
+        <div class="recipe_wrap">
+            <h2>티젠의 <b>특별 레시피</b><span>색다른 하루를 위한 티젠을 120% 즐기는 방법</span></h2>
+            <div class="recipe">
+                <div class="left_wrap">
+                    <h3>타로 버블 밀크티<span>TARO BUBBLE MILKTEA</span></h3>
+                    <p class="rcp recipe1"><img src="images/main/recipe/taro_bubble_tea.jpg" alt="#" width="520" height="430"></p>
+                </div><!--left_wrap-->
+                <div class="right_wrap">
+                    <div class="right_top">
+                        <div class="rcp">
+                            <h3>딸기 요거트 스무디<span>STRAWBERRY YOGERT SMOOTHIE</span></h3>
+                            <p class="recipe2"><img src="images/main/recipe/yogert_smudi.jpg" alt="#" width="440" height="210"></p>
+                        </div>
+                        <div class="rcp">
+                            <h3>무알콜 자몽모히또<span>JAMONG MOJITO</span></h3>
+                            <p class="recipe3"><img src="images/main/recipe/jamong_mohitto.jpg" alt="#" width="220" height="210"></p>
+                        </div>  
+                    </div><!--right_top-->
+                    <div class="right_bottom">
+                        <div class="rcp">
+                            <h3>바닐라 아인슈페너<span>VANILLA EINSPANNER</span></h3>
+                            <p class="recipe4"><img src="images/main/recipe/vanila_einspanner.jpg" alt="#" width="220" height="210"></p>
+                        </div>
+                        <div class="rcp">
+                            <h3>말차 프라페<span>MATCHA FRAPPE</span></h3>
+                            <p class="recipe5"><img src="images/main/recipe/matcha_frappe.jpg" alt="#" width="440" height="210"></p>
+                        </div>  
+                    </div><!--right_bottom-->
+                </div><!--right_wrap-->
+            </div>
+        </div><!--recipe_wrap-->
+    </div>
+    
+    <div id="bottom">
+
+    </div>
+    
+    <div id="quick_fixed">
+        <ul class="fixed_list">
+            <li><a href="#" class="q_top">TOP</a></li>
+            <li><a href="login.html">로그인</a></li>
+            <li><a href="#">장바구니</a></li>
+            <li>최근 본 상품&#40;<span>0</span>&#41;
+                <ul class="recent_list">
+                    <li class="noitem">최근 본 상품이<br>없습니다.</li>
+                </ul>
+            </li>
+            <li><a href="#">상담/문의</a></li>
+            <li><a href="#" class="q_bottom">BOTTOM</a></li>
+        </ul>
+    </div>
+<!--
+    <p id="quick_btn">
+        <button><img src="images/leaf_i.png" alt="#" width="60" height="60"></button>
+    </p>
+-->
+</body>
+
+</html>
