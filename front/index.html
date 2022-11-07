@@ -9,123 +9,150 @@
     <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="js/jquery.bxslider.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/top.js"></script>
     <script>
         $(document).ready(function(){
-            $("#top").load("header.html");
             $("#bottom").load("bottom.html");
-            let bannerNum = 1;
-            function slide(n){
-                if(bannerNum==8){
-                    bannerNum = 1;
-                }
-                if(bannerNum==0){
-                    bannerNum = 7;
-                }
-                $(".btn_wrap button").removeClass("active");
-                $(".btn" + bannerNum).addClass("active");
-                $(".photo li").css({left:0}).stop().animate({left:"-1920px"},1000,function(){
-                    $(this).css("z-index","1");
-                });
-                $(".photo li.no" + bannerNum).css({left:"1920px"}).stop().animate({left:"0px"},1000,function(){
-                    $(this).css("z-index","2");
-                });
-            }
-
-            $(".btn").click(function(){
-                bannerNum = $(this).attr("data-n");
-                slide(bannerNum);
-
-            });
-
-            $(".next").click(function(){
-                clearInterval(banner);
-                bannerNum++;  
-                slide(bannerNum);
-                banner = setInterval(function(){
-                    bannerNum++;
-                    console.log(bannerNum);
-                    slide(bannerNum);
-                },3000);
-            });
-            $(".prev").click(function(){
-                clearInterval(banner);
-                bannerNum--;       
-                slide(bannerNum);
-                banner = setInterval(function(){
-                    bannerNum++;
-                    console.log(bannerNum);
-                    slide(bannerNum);
-                },3000);
-            });
-            
-            var banner = setInterval(function(){
-                bannerNum++;
-                console.log(bannerNum);
-                slide(bannerNum);
-            },3000);
-            
-
         });
         
     </script>
    
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <script src="js/slick.js"></script>
+    
+    
     <style>
-        #wrap{width:1920px;height:480px;margin:0 auto;position:relative;}
-        .photo{width:1920px;height:480px;position:relative;overflow:hidden;}
-        .photo li{width:1920px;height:480px;position:absolute;top:0;}
-        .photo li.no1{left:0px;z-index:1;}
-        .photo li.no2{left:1920px;}
-        .photo li.no3{left:1920px;}
-        .photo li.no4{left:1920px;}
-        .photo li.no5{left:1920px;}
-        .photo li.no6{left:1920px;}
-        .photo li.no7{left:1920px;}
-
-        .prev,.next{position:absolute;top:50%;transform:translate(0,-50%);cursor:pointer;z-index:10;width:50px;height:50px;font-size:30px;}
-        .prev{left:10px;}
-        .next{right:10px;}
-
-        .btn_wrap{position:absolute;left:50%;bottom:30px;transform:translate(-50%,0);z-index:10;width:200px;height:20px;}
-        .btn_wrap li{width:20px;height:20px;float:left;margin-left:10px;}
-        .btn_wrap li:first-child{margin-left:0;}
-        .btn_wrap li .btn{width:20px;height:20px;background-color:#eaeaea;cursor:pointer;border-radius:50%;box-shadow:2px 2px rgba(0,0,0,0.3);color:transparent;border:none;}
-        .btn_wrap li .active{background-color:#666666;}
+        .main_ad{
+            position:relative;
+        }
+        .banner-slider{
+            margin:0 auto;
+            width:1920px;
+            height:480px;
+            position:relative;
+            min-width:1200px;
+            
+        }
+        .banner{
+            width:100%;
+            min-width:1200px;
+            margin:0 auto;
+            overflow:hidden;
+        }
+        .indicator{
+            position:absolute;
+            width:1200px;
+            top:60%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+        .prevArrow{float:left;}
+        .nextArrow{float:right;}
     </style>
+    
 </head>
 
 <body><!---->
     <div id="top">
+        <header id="top_wrap">
+            <nav class="quick">
+                <ul class="quick_wrap">
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">커뮤니티</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+            </nav><!--quick-->  
         
+            <h1><a href="index.html"><img src="images/main/top/logo_w.png" alt="TEAZEN 로고" width="150" height="77"></a></h1>
+        
+            <nav class="main_navi">
+                <ul class="menu">
+                    <li><a href="#">카테고리</a>
+                        <ul class="sub">
+                            <li><a href="#">티젠상품모두보기</a></li>
+                            <li><a href="#">콤부차</a></li>
+                            <li><a href="#">기능성 TEA스틱</a></li>
+                            <li><a href="#">프리미엄 파우더</a></li>
+                            <li><a href="#">잎차</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">특별기획</a>
+                        <ul class="sub">
+                            <li><a href="#">티젠몰 특가전</a></li>
+                            <li><a href="#">티젠 선물세트</a></li>
+                            <li><a href="#">티웨어/소품</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">할인상품</a>
+                        <ul class="sub">
+                            <li><a href="#">유통 임박 SALE</a></li>
+                            <li><a href="#">대량구매 SALE</a></li>
+                            <li><a href="#">유리다구류 SALE</a></li>
+                            <li><a href="#">무료배송 상품</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">커뮤니티</a>
+                        <ul class="sub">
+                            <li><a href="#">공지사항</a></li>
+                            <li><a href="#">자주하는 질문</a></li>
+                            <li><a href="#">티젠 생생리뷰</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">마이페이지</a>
+                        <ul class="sub">
+                            <li><a href="#">장바구니</a></li>
+                            <li><a href="#">주문배송</a></li>
+                            <li><a href="#">관심 상품</a></li>
+                            <li><a href="#">쿠폰 등록</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav><!--main_navi-->
+            <div class="q_join">
+                <ul class="q_join_wrap">
+                    <li><a href="login.html">LOGIN</a></li>
+                    <li><a href="join.html">JOIN</a></li>
+                </ul><!--join-->
+            </div>   
+        </header><!--top_wrap-->
     </div><!--top-->
 
     <div class="section main_ad show">
-        <div id="wrap">
-            <ul class="photo">
-                <li class="no1"><img src="images/main/banner_01.jpg" alt="#" width="1920" height="480"></li>
-                <li class="no2"><img src="images/main/banner_02.jpg" alt="#" width="1920" height="480"></li>
-                <li class="no3"><img src="images/main/banner_03.jpg" alt="#" width="1920" height="480"></li>
-                <li class="no4"><img src="images/main/banner_04.jpg" alt="#" width="1920" height="480"></li>
-                <li class="no5"><img src="images/main/banner_05.jpg" alt="#" width="1920" height="480"></li>
-                <li class="no6"><img src="images/main/banner_06.jpg" alt="#" width="1920" height="480"></li>
-                <li class="no7"><img src="images/main/banner_07.jpg" alt="#" width="1920" height="480"></li>
-            </ul>
-            <p>
-                <button type="button" class="prev">&lt;</button>
-                <button type="button" class="next">&gt;</button>
-            </p>
-            <ul class="btn_wrap">
-                <li><button type="button" title="1번버튼" data-n="1" class="btn btn1 active">1</button></li>
-                <li><button type="button" title="2번버튼" data-n="2" class="btn btn2">2</button></li>
-                <li><button type="button" title="3번버튼" data-n="3" class="btn btn3">3</button></li>
-                <li><button type="button" title="4번버튼" data-n="4" class="btn btn4">4</button></li>
-                <li><button type="button" title="5번버튼" data-n="5" class="btn btn5">5</button></li>
-                <li><button type="button" title="6번버튼" data-n="6" class="btn btn6">6</button></li>
-                <li><button type="button" title="7번버튼" data-n="7" class="btn btn7">7</button></li>
-            </ul>
+        <div class="banner-slider">
+            <div class="banner-wrapper">
+                <div class="banner"><img src="images/main/banner_01.jpg" alt="#" width="1920" height="480"></div>
+                <div class="banner"><img src="images/main/banner_02.jpg" alt="#" width="1920" height="480"></div>
+                <div class="banner"><img src="images/main/banner_03.jpg" alt="#" width="1920" height="480"></div>
+                <div class="banner"><img src="images/main/banner_04.jpg" alt="#" width="1920" height="480"></div>
+                <div class="banner"><img src="images/main/banner_05.jpg" alt="#" width="1920" height="480"></div>
+                <div class="banner"><img src="images/main/banner_06.jpg" alt="#" width="1920" height="480"></div>
+                <div class="banner"><img src="images/main/banner_07.jpg" alt="#" width="1920" height="480"></div>
+            </div>
+ 
         </div>
+        <div class="indicator">
+            <p class="prevArrow"><img src="images/banner_prev.png" alt="이전"></p>
+            <p class="nextArrow"><img src="images/banner_next.png" alt="이전"></p>        
+        </div>
+        <script>
+            $(function(){
+                $('.banner-wrapper').slick({
+                    infinite:true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    pauseOnHover:true,
+                    
+                    prevArrow:$('.prevArrow'),
+                    nextArrow:$('.nextArrow'),
+                });
+            });
+        </script>
     </div>
 
     <div class="section main_category">

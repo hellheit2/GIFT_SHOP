@@ -31,10 +31,11 @@ public class MemberController {
     @PostMapping(value = "/join")
     public String memberJoin(@Valid MemberFormDTO memberFormDTO, BindingResult bindingResult, Model model){
 
+        System.out.println("post join");
         if(bindingResult.hasErrors()){
+            System.out.println("hasErrors() : " + bindingResult.toString());
             return "member/memberJoinForm";
         }
-
         try{
             Member member = Member.createMember(memberFormDTO, passwordEncoder);
             memberService.joinMember(member);
@@ -42,8 +43,17 @@ public class MemberController {
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberJoinForm";
         }
-
-
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/login")
+    public String memberLogin(){
+        return "member/memberLoginForm";
+    }
+
+    @GetMapping(value = "/login/error")
+    public String loginError(Model model){
+        model.addAttribute("loginErrorMsg", "아이디 비밀번호를 확인해주세요");
+        return "member/memberLoginForm";
     }
 }

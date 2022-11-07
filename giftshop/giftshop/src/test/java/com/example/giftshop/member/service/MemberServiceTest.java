@@ -37,6 +37,8 @@ class MemberServiceTest {
     @DisplayName("회원가입 테스트")
     void joinMemberTest() {
         Member member = createTestMember();
+
+        System.out.println("회원가입 테스트 : " + member.toString());
         Member joinedMember = memberService.joinMember(member);
 
         assertEquals(member.getEmail(), joinedMember.getEmail());

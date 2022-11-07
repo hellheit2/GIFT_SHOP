@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.time.LocalDateTime;
 
 @Controller
-@RequestMapping(value="/goods")
+/*@RequestMapping(value="/goods")*/
 public class GoodsController {
 
 
+    /*
     @GetMapping(value="/test")
     public String thymeleafTest(Model model){
         GoodsDTO goodsDTO = GoodsDTO.builder()
@@ -24,6 +25,11 @@ public class GoodsController {
 
         model.addAttribute("goodsDTO", goodsDTO);
         return "board/test";
+    }
+    */
 
+    @GetMapping(value = "/admin/goods/regist")
+    public String goodsRegistForm(){
+        return "goods/goodsRegistForm";
     }
 }
