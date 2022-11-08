@@ -1,5 +1,6 @@
 package com.example.giftshop.goods.entity;
 
+import com.example.giftshop.common.entity.BaseEntity;
 import com.example.giftshop.goods.constant.GoodsSellStatus;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -18,10 +19,10 @@ import java.util.List;
 @ToString
 @DynamicInsert
 @DynamicUpdate
-public class Goods {
+public class Goods extends BaseEntity {
 
     @Id
-    @Column
+    @Column(name = "goods_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // 상품 번호
 
@@ -30,6 +31,9 @@ public class Goods {
 
     @Column(nullable = false)
     private int goodsPrice; // 가격
+
+    @Column(nullable = false)
+    private int goodsStock; // 재고수량
 
     @Column(nullable = false)
     private int goodsSale; // 할인율
@@ -47,24 +51,25 @@ public class Goods {
     @Enumerated(EnumType.STRING)
     private GoodsSellStatus goodsSellStatus; // 판매 상태
 
-    private LocalDateTime regTime; // 등록일
-
     @OneToMany(mappedBy="goods", cascade = CascadeType.ALL) //, fetch=FetchType.EAGER
     private List<GoodsCategory> categoryList = new ArrayList<>(); // 카테고리
 
-    @OneToMany(mappedBy="goods", cascade = CascadeType.ALL)
-    private List<GoodsImage> imageList = new ArrayList<>(); //이미지
+/*
+    @OneToMany(mappedBy="goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Image> imageList = new ArrayList<>(); //이미지
+*/
 
     @Builder
-    public Goods(Long id, String goodsName, int goodsPrice, int goodsSale, String goodsDetail, int goodsView, float goodsRating, GoodsSellStatus goodsSellStatus, LocalDateTime regTime) {
+    public Goods(Long id, String goodsName, int goodsPrice, int goodsStock, int goodsSale,
+                 String goodsDetail, int goodsView, float goodsRating, GoodsSellStatus goodsSellStatus) {
         this.id = id;
         this.goodsName = goodsName;
         this.goodsPrice = goodsPrice;
+        this.goodsStock = goodsStock;
         this.goodsSale = goodsSale;
         this.goodsDetail = goodsDetail;
         this.goodsView = goodsView;
         this.goodsRating = goodsRating;
         this.goodsSellStatus = goodsSellStatus;
-        this.regTime = regTime;
     }
 }

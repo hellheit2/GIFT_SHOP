@@ -40,9 +40,9 @@ class GoodsRepositoryTest {
         Goods goods = Goods.builder()
                 .goodsName("테스트 상품")
                 .goodsPrice(10000)
+                .goodsStock(100)
                 .goodsDetail("테스트 상품 상세 설명")
-                .goodsSellStatus(GoodsSellStatus.SELL)
-                .regTime(LocalDateTime.now()).build();
+                .goodsSellStatus(GoodsSellStatus.SELL).build();
 
         Goods savedGoods = goodsRepository.save(goods);
         log.info(savedGoods.toString());
@@ -68,8 +68,7 @@ class GoodsRepositoryTest {
                     .goodsName("테스트 상품" + i)
                     .goodsPrice(10000 + i)
                     .goodsDetail("테스트 상품 상세 설명" + i)
-                    .goodsSellStatus(GoodsSellStatus.SELL)
-                    .regTime(LocalDateTime.now()).build();
+                    .goodsSellStatus(GoodsSellStatus.SELL).build();
 
             Goods savedGoods = goodsRepository.save(goods);
         }

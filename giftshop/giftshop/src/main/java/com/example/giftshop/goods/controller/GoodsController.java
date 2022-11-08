@@ -28,8 +28,8 @@ public class GoodsController {
     }
     */
 
-    @GetMapping(value = "/admin/goods/regist")
-    public String goodsRegistForm(){
-        return "goods/goodsRegistForm";
+    @GetMapping(value = "/admin/goods/register")
+    public String goodsRegisterForm(){
+        return "goods/goodsRegisterForm";
     }
 }

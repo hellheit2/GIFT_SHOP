@@ -14,14 +14,15 @@ import java.util.List;
 public class Image {
 
     @Id
-    @Column
+    @Column(name = "image_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;		// 이미지 아이디
     private String fileName;	// 파일명
     private String fileType;	// 이미지 구분(상세, 썸네일, 설명)
 
-    @OneToMany(mappedBy="image", cascade = CascadeType.ALL)
-    private List<GoodsImage> goodsList = new ArrayList<>();
+/*    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "goods_id",nullable = false)
+    private Goods goods;*/
 
     @Builder
     public Image(int id, String fileName, String fileType) {

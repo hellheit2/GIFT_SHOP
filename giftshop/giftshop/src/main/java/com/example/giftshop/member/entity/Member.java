@@ -1,5 +1,6 @@
 package com.example.giftshop.member.entity;
 
+import com.example.giftshop.common.entity.BaseEntity;
 import com.example.giftshop.member.constant.Role;
 import com.example.giftshop.member.dto.MemberFormDTO;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @Column(name="member_id")
