@@ -25,7 +25,7 @@ public class MemberController {
     @GetMapping(value = "/join")
     public String memberJoin(Model model){
         model.addAttribute("memberFormDTO", new MemberFormDTO());
-        return "member/memberJoinForm";
+        return "member/joinform";
     }
 
     @PostMapping(value = "/join")
@@ -34,26 +34,26 @@ public class MemberController {
         System.out.println("post join");
         if(bindingResult.hasErrors()){
             System.out.println("hasErrors() : " + bindingResult.toString());
-            return "member/memberJoinForm";
+            return "member/joinform";
         }
         try{
             Member member = Member.createMember(memberFormDTO, passwordEncoder);
             memberService.joinMember(member);
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "member/memberJoinForm";
+            return "member/joinform";
         }
         return "redirect:/";
     }
 
     @GetMapping(value = "/login")
     public String memberLogin(){
-        return "member/memberLoginForm";
+        return "member/loginform";
     }
 
     @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg", "아이디 비밀번호를 확인해주세요");
-        return "member/memberLoginForm";
+        return "member/loginform";
     }
 }

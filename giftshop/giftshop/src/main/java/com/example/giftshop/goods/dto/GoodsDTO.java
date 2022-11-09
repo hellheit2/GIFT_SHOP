@@ -1,14 +1,14 @@
 package com.example.giftshop.goods.dto;
 
 import com.example.giftshop.goods.constant.GoodsSellStatus;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class GoodsDTO {
 

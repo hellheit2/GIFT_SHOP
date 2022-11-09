@@ -8,10 +8,10 @@
       <div>
         <ul>
           <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-            <a href="/admin/item/new">상품 등록</a>
+            <a href="/admin/goods/register">상품 등록</a>
           </li>
           <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-            <a href="/admin/item/new">상품 관리</a>
+            <a href="/admin/goods/register">상품 관리</a>
           </li>
           <li sec:authorize="isAuthenticated()">
             <a href="/members/cart">장바구니</a>

@@ -2,6 +2,7 @@ package com.example.giftshop.goods.entity;
 
 import com.example.giftshop.common.entity.BaseEntity;
 import com.example.giftshop.goods.constant.GoodsSellStatus;
+import com.example.giftshop.goods.dto.GoodsFormDTO;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -12,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="t_goods")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString
@@ -54,22 +56,15 @@ public class Goods extends BaseEntity {
     @OneToMany(mappedBy="goods", cascade = CascadeType.ALL) //, fetch=FetchType.EAGER
     private List<GoodsCategory> categoryList = new ArrayList<>(); // 카테고리
 
-/*
-    @OneToMany(mappedBy="goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Image> imageList = new ArrayList<>(); //이미지
-*/
+    //상품 데이터 업데이트
+    //엔티티 클래스 비즈니스 로직 -> 객체지향적 코딩
+    public void updateGoods(GoodsFormDTO goodsFormDTO){
+        this.goodsName = goodsFormDTO.getGoodsName();
+        this.goodsPrice = goodsFormDTO.getGoodsPrice();
+        this.goodsStock = goodsFormDTO.getGoodsStock();
+        this.goodsDetail = goodsFormDTO.getGoodsDetail();
+        this.goodsSellStatus = goodsFormDTO.getGoodsSellStatus();
 
-    @Builder
-    public Goods(Long id, String goodsName, int goodsPrice, int goodsStock, int goodsSale,
-                 String goodsDetail, int goodsView, float goodsRating, GoodsSellStatus goodsSellStatus) {
-        this.id = id;
-        this.goodsName = goodsName;
-        this.goodsPrice = goodsPrice;
-        this.goodsStock = goodsStock;
-        this.goodsSale = goodsSale;
-        this.goodsDetail = goodsDetail;
-        this.goodsView = goodsView;
-        this.goodsRating = goodsRating;
-        this.goodsSellStatus = goodsSellStatus;
+
     }
 }
