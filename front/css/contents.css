@@ -34,25 +34,34 @@
     background-color:#666666;
     border-radius:3px;
 }
-/************************ main_ad ************************/
-.main_ad{
+/************************ main_slider ************************/
+.main_slider{
     height:480px;
     padding-top:120px;
-}
-.ad{
-    width:1200px;
-    height:480px;
-    margin:0 auto;
     position:relative;
-    z-index:-3;
 }
-#v_con{
-    width:1200px;
-    height:800px;
+.banner-slider{
     margin:0 auto;
-    overflow:hidden;
-    opacity:1;
+    width:1920px;
+    height:480px;
+    min-width:1200px;
+    
 }
+.banner{
+    width:100%;
+    background-color:yellow;
+    margin:0 auto;
+}
+.indicator{
+    position:absolute;
+    width:1200px;
+    top:60%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+.prevArrow{float:left;}
+.nextArrow{float:right;}
+
 
 /************************ main_category ************************/
 .main_category{
@@ -72,15 +81,15 @@
 }
 .con_wrap > div{
     box-sizing:border-box;
-    width:330px;/* 330*3 990 1200-990-30 180*/
+    width:330px;/* 330*3 990 1200-990 210 105 52*/
     float:left;
-    margin:0 15px;
+    margin:0 52px;
     text-align:center;
     position:relative;
     top:0px;
 }
-.con_wrap > div:nth-of-type(1){margin-left:75px}
-.con_wrap > div:nth-of-type(3){margin-right:75px}
+.con_wrap > div:nth-of-type(1){margin-left:0px}
+.con_wrap > div:nth-of-type(3){margin-right:0px}
 .main_category .category{
     border: 2px solid #666666;
     display:inline-block;

@@ -16,9 +16,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 @DynamicInsert
 @DynamicUpdate
 public class Goods extends BaseEntity {
@@ -53,7 +51,7 @@ public class Goods extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private GoodsSellStatus goodsSellStatus; // 판매 상태
 
-    @OneToMany(mappedBy="goods", cascade = CascadeType.ALL) //, fetch=FetchType.EAGER
+    @OneToMany(mappedBy="goods",fetch=FetchType.EAGER, cascade = CascadeType.ALL) //fetch=FetchType.EAGER
     private List<GoodsCategory> categoryList = new ArrayList<>(); // 카테고리
 
     //상품 데이터 업데이트

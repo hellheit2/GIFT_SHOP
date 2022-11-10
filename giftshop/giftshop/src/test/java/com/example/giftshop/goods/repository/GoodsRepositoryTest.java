@@ -9,6 +9,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +63,9 @@ class GoodsRepositoryTest {
 
     }
 
+    //@BeforeEach
     public void createGoodsList(){
-        for(int i=1;i<=10;i++){
+        for(int i=1;i<=200;i++){
             Goods goods = Goods.builder()
                     .goodsName("테스트 상품" + i)
                     .goodsPrice(10000 + i)
@@ -77,7 +79,6 @@ class GoodsRepositoryTest {
     @Test
     @DisplayName("상품명 조회 테스트")
     public void findByGoodsTest(){
-        this.createGoodsList();
         List<Goods> goodsList = goodsRepository.findByGoodsName("테스트 상품1");
         for(Goods goods : goodsList){
             log.info(goods.toString());
@@ -87,7 +88,6 @@ class GoodsRepositoryTest {
     @Test
     @DisplayName("가격 LessThan 테스트")
     public void findByPriceRangeTest(){
-        this.createGoodsList();
         List<Goods> goodsList = goodsRepository.findByGoodsPriceBetween(10002,10006);
         for(Goods goods : goodsList){
             log.info(goods.toString());
@@ -97,7 +97,6 @@ class GoodsRepositoryTest {
     @Test
     @DisplayName("Querydsl 조회 테스트")
     public void queryDslTest(){
-        this.createGoodsList();
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
         QGoods qGoods = QGoods.goods;
         JPAQuery<Goods> query = queryFactory.selectFrom(qGoods)

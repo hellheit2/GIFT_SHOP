@@ -8,9 +8,7 @@ import lombok.Setter;
 @Setter
 public class GoodsSearchDTO {
 
-    private GoodsSellStatus searchSellstatus;
-
-    private String searchBy;
+    private GoodsSellStatus searchSellStatus;
 
     private String searchQuery = "";
 

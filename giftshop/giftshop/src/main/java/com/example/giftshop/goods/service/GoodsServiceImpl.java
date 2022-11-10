@@ -3,11 +3,15 @@ package com.example.giftshop.goods.service;
 
 import com.example.giftshop.goods.dto.GoodsFormDTO;
 import com.example.giftshop.goods.dto.GoodsImageDTO;
+import com.example.giftshop.goods.dto.GoodsSearchDTO;
 import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.entity.GoodsImage;
 import com.example.giftshop.goods.repository.GoodsImageRepository;
 import com.example.giftshop.goods.repository.GoodsRepository;
+import com.example.giftshop.main.dto.MainGoodsDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +31,6 @@ public class GoodsServiceImpl implements GoodsService{
     private final GoodsImageService goodsImageService;
     @Override
     public Long uploadGoods(GoodsFormDTO goodsFormDTO, List<MultipartFile> goodsImageList) throws Exception {
-
         //상품 등록
         Goods goods = goodsFormDTO.createGoods();
         goodsRepository.save(goods);
@@ -51,7 +54,7 @@ public class GoodsServiceImpl implements GoodsService{
     @Override
     @Transactional(readOnly = true) //트랜잭션 읽기 전용
     public GoodsFormDTO getGoodsDetail(Long goodsId) {
-
+        //상품 상세
         List<GoodsImage> goodsImageList = goodsImageRepository.findByGoodsIdOrderByIdAsc(goodsId); //상품 아아디로 이미지 리스트
         List<GoodsImageDTO> goodsImgDTOList = new ArrayList<>();
         for(GoodsImage temp : goodsImageList){ //이미지 리스트 DTO 객체로 저장
@@ -69,7 +72,6 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     public Long updateGoods(GoodsFormDTO goodsFormDTO, List<MultipartFile> goodsImageList) throws Exception {
-
         //상품 수정
         Goods goods = goodsRepository.findById(goodsFormDTO.getId()) // 상품 확인
                 .orElseThrow(EntityNotFoundException::new);
@@ -84,4 +86,18 @@ public class GoodsServiceImpl implements GoodsService{
         return goods.getId();
     }
 
+    @Override
+    @Transactional(readOnly = true) //트랜잭션 읽기 전용
+    public Page<Goods> getAdminGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
+        //상품 목록 페이징(관리자)
+        return goodsRepository.getAdminGoodsPage(goodsSearchDTO, pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+        //메인 페이지 상품
+        return goodsRepository.getMainGoodsPage(goodsSearchDTO,pageable);
+
+    }
 }

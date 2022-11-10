@@ -7,7 +7,8 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import java.util.List;
 
 public interface GoodsRepository extends JpaRepository<Goods, Long>,
-        QuerydslPredicateExecutor<Goods> {
+        QuerydslPredicateExecutor<Goods>,
+        GoodsRepositoryCustom{
 
     List<Goods> findByGoodsName(String goodsName);
     List<Goods> findByGoodsPriceBetween(Integer minPrice, Integer maxPrice);
