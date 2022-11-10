@@ -6,51 +6,49 @@
 <!-- CSS 추가 -->
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/layout.css}">
+  <link rel="stylesheet" th:href="@{/css/contents.css}">
   <link rel="stylesheet" th:href="@{/css/slick.css}">
-  <style>
-  </style>
+
 </th:block>
 
 !-- JS 추가 -->
 <th:block layout:fragment="script">
   <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/slick.js}"></script>
   <script th:inline="javascript">
+    $(function(){
+      $('.banner-wrapper').slick({
+        infinite:true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnHover:true,
+
+        prevArrow:$('.prevArrow'),
+        nextArrow:$('.nextArrow'),
+      });
+    });
   </script>
 </th:block>
 
 <div layout:fragment="content">
-  <div class="banner"><img src="/images/main/banner_01.jpg" alt="#" width="1920" height="480"></div>
   <div class="section main_slider show">
     <div class="banner-slider">
       <div class="banner-wrapper">
-        <div class="banner"><img src="/images/main/banner_01.jpg" alt="#" width="1920" height="480"></div>
-        <div class="banner"><img src="/images/main/banner_02.jpg" alt="#" width="1920" height="480"></div>
-        <div class="banner"><img src="/images/main/banner_03.jpg" alt="#" width="1920" height="480"></div>
-        <div class="banner"><img src="/images/main/banner_04.jpg" alt="#" width="1920" height="480"></div>
-        <div class="banner"><img src="/images/main/banner_05.jpg" alt="#" width="1920" height="480"></div>
-        <div class="banner"><img src="/images/main/banner_06.jpg" alt="#" width="1920" height="480"></div>
-        <div class="banner"><img src="/images/main/banner_07.jpg" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_01.jpg}" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_02.jpg}" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_03.jpg}" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_04.jpg}" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_05.jpg}" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_06.jpg}" alt="#" width="1920" height="480"></div>
+        <div class="banner"><img th:src="@{/img/main/banner_07.jpg}" alt="#" width="1920" height="480"></div>
       </div>
     </div>
     <div class="indicator">
-      <p class="prevArrow"><img th:src="@{/images/main/banner_prev.png}" alt="이전"></p>
-      <p class="nextArrow"><img th:src="@{/images/main/banner_next.png}" alt="이전"></p>
+      <p class="prevArrow"><img th:src="@{/img/main/banner_prev.png}" alt="이전"></p>
+      <p class="nextArrow"><img th:src="@{/img/main/banner_next.png}" alt="이전"></p>
     </div>
-    <script>
-      $(function(){
-        $('.banner-wrapper').slick({
-          infinite:true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          pauseOnHover:true,
-
-          prevArrow:$('.prevArrow'),
-          nextArrow:$('.nextArrow'),
-        });
-      });
-    </script>
   </div>
 
   <div class="section main_category">
@@ -59,7 +57,7 @@
       <div class="con_wrap">
         <div class="con">
           <div class="category_img">
-            <img th:src="@{/images/main/product/combucha.jpg}" alt="기능성차" width="330" height="360">
+            <img th:src="@{/img/main/product/combucha.jpg}" alt="기능성차" width="330" height="360">
             <ul>
               <li><a href="#">콤부차/유기농 새싹보리</a></li>
               <li><a href="#">기능성차</a></li>
@@ -80,7 +78,7 @@
             <p class="category_name">Premium Mix Powder<span>프리미엄 파우더</span></p>
           </div>
           <div class="category_img">
-            <img th:src="@{/images/main/product/premium_powder.jpg}" alt="카페용 제품" width="330" height="360">
+            <img th:src="@{/img/main/product/premium_powder.jpg}" alt="카페용 제품" width="330" height="360">
             <ul>
               <li><a href="#">프리믹스파우더</a></li>
               <li><a href="#">피라미드티백</a></li>
@@ -91,7 +89,7 @@
         </div><!--con-->
         <div class="con">
           <div class="category_img">
-            <img th:src="@{/images/main/product/tea.jpg}" alt="콤부차" width="330" height="360">
+            <img th:src="@{/img/main/product/tea.jpg}" alt="콤부차" width="330" height="360">
             <ul>
               <li><a href="#">차류</a></li>
               <li><a href="#">가향블렌딩차</a></li>
@@ -125,7 +123,7 @@
         <li>
           <div class="description">
             <a href="#">
-              <p class="prd_img"><img th:src="@{/images/main/hot_items/special_pd1_saessak_s.jpg}" alt="티젠 유기농 새싹보리 선물세트" width="275" height="275"></p>
+              <p class="prd_img"><img th:src="@{/img/main/hot_items/special_pd1_saessak_s.jpg}" alt="티젠 유기농 새싹보리 선물세트" width="275" height="275"></p>
               <p class="prd_txt">티젠 유기농 새싹보리 선물세트<span>국내산 유기농 새싹보리 100%</span></p>
             </a>
             <div class="percent">30<span>%</span></div>
@@ -138,7 +136,7 @@
         <li>
           <div class="description">
             <a href="#">
-              <p class="prd_img"><img th:src="@{/images/main/hot_items/special_pd2_comb_jamong_s.jpg}" alt="티젠 자몽쏙 50스틱+보틀" width="275" height="275"></p>
+              <p class="prd_img"><img th:src="@{/img/main/hot_items/special_pd2_comb_jamong_s.jpg}" alt="티젠 자몽쏙 50스틱+보틀" width="275" height="275"></p>
               <p class="prd_txt">티젠 자몽쏙 50스틱+보틀<span>자몽을 통째로 갈아만든 자몽쏙!</span></p>
             </a>
             <div class="percent">26<span>%</span></div>
@@ -151,7 +149,7 @@
         <li>
           <div class="description">
             <a href="#">
-              <p class="prd_img"><img th:src="@{/images/main/hot_items/special_pd3_energytea_s.jpg}" alt="티젠 에너지티 50스틱+보틀" width="275" height="275"></p>
+              <p class="prd_img"><img th:src="@{/img/main/hot_items/special_pd3_energytea_s.jpg}" alt="티젠 에너지티 50스틱+보틀" width="275" height="275"></p>
               <p class="prd_txt">티젠 에너지티 50스틱+보틀<span>지치고 힘들 때! 티젠 에너지티</span></p>
             </a>
             <div class="percent">26<span>%</span></div>
@@ -164,7 +162,7 @@
         <li>
           <div class="description">
             <a href="#">
-              <p class="prd_img"><img th:src="@{/images/main/hot_items/special_pd4_comb_lemon_s.jpg}" alt="티젠 콤부차 레몬 30스틱x2박스" width="275" height="275"></p>
+              <p class="prd_img"><img th:src="@{/img/main/hot_items/special_pd4_comb_lemon_s.jpg}" alt="티젠 콤부차 레몬 30스틱x2박스" width="275" height="275"></p>
               <p class="prd_txt">티젠 콤부차 레몬 30스틱x2박스<span>톡! 쏘는 과즙감의 달콤상큼 웰빙티</span></p>
             </a>
             <div class="percent">30<span>%</span></div>

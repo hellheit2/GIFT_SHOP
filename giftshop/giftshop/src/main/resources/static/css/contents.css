@@ -4,6 +4,7 @@
     clear:both;
     width:100%;
     min-width:1200px;
+    margin-bottom:20px;
 }
 
 .section h2{
@@ -63,22 +64,19 @@
 
 /************************ main_category ************************/
 .main_category{
-    height:640px;
+    height:650px;
     /*background:#f3ebed;*/
-    border:1px solid green;
 }
 .contents{
     width:1200px;
     height:620px;
     margin:0 auto;
-    border:1px solid red;
 }
 .con_wrap{
     clear:both;
     width:1200px;
     height:510px;
     overflow:hidden;
-    border:1px solid blue;
 }
 .con_wrap > div{
     box-sizing:border-box;

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityNotFoundException;
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -79,16 +76,10 @@ public class GoodsController {
 
     @GetMapping(value = "/admin/goods/{goodsId}")
     public String getGoodsDetail(@PathVariable("goodsId") Long goodsId, Model model){
-
-        try {
-            GoodsFormDTO goodsFormDTO = goodsService.getGoodsDetail(goodsId);
-            model.addAttribute("goodsFormDTO", goodsFormDTO);
-        }catch (EntityNotFoundException e){
-            model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
-            model.addAttribute("goodsFormDTO", GoodsFormDTO.builder().build());
-            return "goods/registerform";
-        }
-        return "goods/registerform";
+        //상품 상세 설명
+        GoodsFormDTO goodsFormDTO = goodsService.getGoodsDetail(goodsId);
+        model.addAttribute("goods", goodsFormDTO);
+        return "goods/detail";
     }
 
     @PostMapping(value = "/admin/goods/{goodsId}")
