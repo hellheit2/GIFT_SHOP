@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
@@ -26,9 +27,35 @@ public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
         this.queryFactory =new JPAQueryFactory(em); //JPAQueryFactory 생성자 지정
     }
 
+    private BooleanExpression searchByRegDate(String searchDateType){ //상품 등록일 기준
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        if(StringUtils.equals("all", searchDateType) || searchDateType == null){ //전체 날짜
+            return null;
+        } else if(StringUtils.equals("1d", searchDateType)){ //1일
+            dateTime = dateTime.minusDays(1);
+        } else if(StringUtils.equals("1w", searchDateType)){ //1주
+            dateTime = dateTime.minusWeeks(1);
+        } else if(StringUtils.equals("1m", searchDateType)){ //1달
+            dateTime = dateTime.minusMonths(1);
+        } else if(StringUtils.equals("6m", searchDateType)){ //6개월
+            dateTime = dateTime.minusMonths(6);
+        }
+        return QGoods.goods.regTime.after(dateTime);
+    }
+
     private BooleanExpression searchSellStatusEq(GoodsSellStatus searchSellstatus){ //판매 상태 검색
         return searchSellstatus == null ? null  //판매 조건 null일 경우, where 절 해당 조건 무시
                 : QGoods.goods.goodsSellStatus.eq(searchSellstatus); //판매 상태 해당하는 Goods
+    }
+
+    private BooleanExpression searchByLike(String searchBy, String searchQuery){
+        if(StringUtils.equals("goodsName", searchBy)){
+            return QGoods.goods.goodsName.like("%" + searchQuery + "%"); //키워드 포함 Goods
+        }else if(StringUtils.equals("categoryList", searchBy)){
+            return QGoods.goods.goodsName.like("%" + searchQuery + "%"); //카테고리 포함 변경 필요
+        }
+        return null;
     }
 
     private BooleanExpression searchByKeyword(String searchQuery){ //키워드 검색
@@ -44,8 +71,9 @@ public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
 
         List<Goods> results = queryFactory //쿼리 생성
                 .selectFrom(QGoods.goods) //엔티티 지정
-                .where(searchSellStatusEq(goodsSearchDTO.getSearchSellStatus()), //where 조건
-                        searchByKeyword(goodsSearchDTO.getSearchQuery())) //and
+                .where( searchByRegDate(goodsSearchDTO.getSearchDateType()), //where 조건 (날짜)
+                        searchSellStatusEq(goodsSearchDTO.getSearchSellStatus()),  //and (판매 상태)
+                        searchByLike(goodsSearchDTO.getSearchBy(), goodsSearchDTO.getSearchQuery())) //and (조회 유형)
                 .orderBy(QGoods.goods.id.desc()) //아이디 기준 내림차순
                 .offset(pageable.getOffset()) //데이터 조회 시작 인덱스
                 .limit(pageable.getPageSize()) //가지고 올 데이터 최대 개수
@@ -54,9 +82,10 @@ public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
         long total = queryFactory //쿼리 생성
                 .select(Wildcard.count) //카운트
                 .from(QGoods.goods) //엔티티 지정
-                .where(searchSellStatusEq(goodsSearchDTO.getSearchSellStatus()), //where 조건
-                        searchByKeyword(goodsSearchDTO.getSearchQuery()))
-                .fetch().size(); // 총 검색 결과
+                .where( searchByRegDate(goodsSearchDTO.getSearchDateType()), //where 조건 (날짜)
+                        searchSellStatusEq(goodsSearchDTO.getSearchSellStatus()),  //and (판매 상태)
+                        searchByLike(goodsSearchDTO.getSearchBy(), goodsSearchDTO.getSearchQuery())) //and (조회 유형)
+                .fetchOne(); // 총 검색 결과
 
         return new PageImpl<>(results,pageable,total);
     }

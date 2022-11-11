@@ -1,6 +1,7 @@
 package com.example.giftshop.goods.entity;
 
 import com.example.giftshop.common.entity.BaseEntity;
+import com.example.giftshop.common.exception.OutOfStockException;
 import com.example.giftshop.goods.constant.GoodsSellStatus;
 import com.example.giftshop.goods.dto.GoodsFormDTO;
 import lombok.*;
@@ -62,7 +63,19 @@ public class Goods extends BaseEntity {
         this.goodsStock = goodsFormDTO.getGoodsStock();
         this.goodsDetail = goodsFormDTO.getGoodsDetail();
         this.goodsSellStatus = goodsFormDTO.getGoodsSellStatus();
-
-
     }
+
+    public void addStock(int num){
+        this.goodsStock += num;
+    }
+    public void removeStock(int num){
+        int restStock = this.goodsStock - num; //재고 감소 후 개수
+        if(restStock < 0) { //0보다 작을 시, 재고 부족
+            throw new OutOfStockException("상품의 재고가 부족합니다." +
+                    "(현재 재고 수량 : " + this.goodsStock + ")");
+        }
+        this.goodsStock = restStock; //재고 최신화
+    }
+
+
 }

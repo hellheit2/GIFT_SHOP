@@ -63,7 +63,7 @@ public class OrdersTest {
             orderGoods.setCount(10); //개수 설정
             orderGoods.setOrderPrice(1000); //가격 설정
             orderGoods.setOrders(orders); //주문 지정(주인)
-            orders.getOrderGoods().add(orderGoods); //주문에 상품주문 추가
+            orders.getOrderGoodsList().add(orderGoods); //주문에 상품주문 추가
         }
 
         ordersRepository.saveAndFlush(orders); //orders 저장, flush 호출 => orders에 속한 ordersGoods에 영속성 전이
@@ -71,7 +71,7 @@ public class OrdersTest {
 
         Orders savedOrders = ordersRepository.findById(orders.getId())
                 .orElseThrow(EntityNotFoundException::new);
-        assertEquals(3,savedOrders.getOrderGoods().size());
+        assertEquals(3,savedOrders.getOrderGoodsList().size());
     }
 
     @Autowired
@@ -88,7 +88,7 @@ public class OrdersTest {
             ordersGoods.setCount(10); //개수 설정
             ordersGoods.setOrderPrice(1000); //가격 설정
             ordersGoods.setOrders(orders); //주문 지정(주인)
-            orders.getOrderGoods().add(ordersGoods); //주문에 상품주문 추가
+            orders.getOrderGoodsList().add(ordersGoods); //주문에 상품주문 추가
         }
 
         Member member = new Member();
@@ -103,7 +103,7 @@ public class OrdersTest {
     @DisplayName("고아객체 제거 테스트")
     public void orphanRemovalTest(){
         Orders orders = this.createOrders();
-        orders.getOrderGoods().remove(0);
+        orders.getOrderGoodsList().remove(0);
         em.flush();
     }
 
@@ -114,7 +114,7 @@ public class OrdersTest {
     @DisplayName("지연 로딩 테스트")
     public void lazyLoadingTest(){
         Orders orders = this.createOrders();
-        Long ordersGoodsId = orders.getOrderGoods().get(0).getId();
+        Long ordersGoodsId = orders.getOrderGoodsList().get(0).getId();
         em.flush();
         em.clear();
 

@@ -47,7 +47,7 @@ public class Member extends BaseEntity {
         member.setAddress(memberFormDTO.getAddress());
         String password = passwordEncoder.encode(memberFormDTO.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
 }

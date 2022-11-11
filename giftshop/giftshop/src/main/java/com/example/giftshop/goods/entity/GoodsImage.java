@@ -24,7 +24,7 @@ public class GoodsImage extends BaseEntity {
     private String repImgYn; // 대표 이미지 여부
     private String imgType;	// 이미지 구분(상세, 썸네일, 설명)
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "goods_id")
     private Goods goods;
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,7 @@ public class GoodsController {
 
     @GetMapping(value = "/admin/goods/register")
     public String goodsRegisterForm(Model model){
+        //상품 등록
         model.addAttribute("goodsFormDTO", GoodsFormDTO.builder().build());
         return "goods/registerform";
     }
@@ -75,6 +77,21 @@ public class GoodsController {
     }
 
     @GetMapping(value = "/admin/goods/{goodsId}")
+    public String goodsModify(@PathVariable("goodsId") Long goodsId, Model model){
+        //관리자 상품 관리
+        try{
+            GoodsFormDTO goodsFormDTO = goodsService.getGoodsDetail(goodsId);
+            model.addAttribute("goodsFormDTO", goodsFormDTO);
+        }catch(EntityNotFoundException e){
+            model.addAttribute("errorMessage","존재하지 않는 상품입니다.");
+            model.addAttribute("goodsFormDTO", new GoodsFormDTO());
+            return "goods/registerform";
+        }
+
+        return "goods/registerform";
+    }
+
+    @GetMapping(value = "/goods/{goodsId}")
     public String getGoodsDetail(@PathVariable("goodsId") Long goodsId, Model model){
         //상품 상세 설명
         GoodsFormDTO goodsFormDTO = goodsService.getGoodsDetail(goodsId);

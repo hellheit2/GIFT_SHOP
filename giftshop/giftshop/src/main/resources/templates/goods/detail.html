@@ -1,10 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
 
-</body>
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+
+<!-- CSS 추가 -->
+<th:block layout:fragment="css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link th:href="@{/css/goodsdtl.css}" rel="stylesheet" />
+</th:block>
+
+!-- JS 추가 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function(){
+
+            calculateToalPrice();
+
+            $("#count").change( function(){
+                calculateToalPrice();
+            });
+        });
+
+        function calculateToalPrice(){
+            let count = $("#count").val();
+            let price = $("#price").val();
+            let totalPrice = price*count;
+            $("#totalPrice").html(totalPrice + '원');
+        }
+
+        function order(){
+            console.log("order()");
+
+            //스프링 시큐리티 : POST 요청시 CSRF 토큰 필요
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+
+            let url = "/order";
+            let paramData = {
+                goodsId : $("#goodsId").val(),
+                count : $("#count").val()
+            };
+
+            let param = JSON.stringify(paramData);
+
+            $.ajax({
+                url      : url,
+                type     : "POST",
+                contentType : "application/json",
+                data     : param,
+                beforeSend : function(xhr){
+                    // 데이터를 전송하기 전에 헤더에 csrf값을 설정
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    alert("주문이 완료 되었습니다.");
+                    location.href='/';
+                },
+                error : function(jqXHR, status, error){
+
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/members/login';
+                    } else{
+                        alert(jqXHR.responseText);
+                    }
+                }
+            });
+        }
+
+        function addCart(){
+            console.log("addCart()");
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+
+            let url = "/cart";
+            let paramData = {
+                goodsId : $("#goodsId").val(),
+                count : $("#count").val()
+            };
+
+
+            let param = JSON.stringify(paramData);
+            $.ajax({
+                url      : url,
+                type     : "POST",
+                contentType : "application/json",
+                data     : param,
+                beforeSend : function(xhr){
+                    // 데이터를 전송하기 전에 헤더에 csrf값을 설정
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType : "json",
+                cache   : false,
+                success  : function(result, status){
+                    alert("상품을 장바구니에 담았습니다.");
+                    location.href='/';
+                },
+                error : function(jqXHR, status, error){
+
+                    if(jqXHR.status == '401'){
+                        alert('로그인 후 이용해주세요');
+                        location.href='/members/login';
+                    } else{
+                        alert(jqXHR.responseText);
+                    }
+
+                }
+            });
+        }
+    </script>
+
+</th:block>
+
+<div layout:fragment="content">
+
+    <!-- Product section-->
+    <section class="py-5">
+        <input type="hidden" id="goodsId" th:value="${goods.id}">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center goods-wrap">
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" th:src="${goods.goodsImageList[0].imgUrl}" th:alt="${goods.goodsName}" />
+                </div>
+                <div class="col-md-6 goods-info">
+                        <span th:if="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}" class="badge badge-primary mgb-15">
+                            판매중
+                        </span>
+                    <span th:unless="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}" class="badge btn-danger mgb-15" >
+                            품절
+                        </span>
+                    <h2 class="fw-bolder goods-title" th:text="${goods.goodsName}">상품 제목</h2>
+                        <div class="fs-5 mb-5 goods-price">
+                            <input type="hidden" th:value="${goods.goodsPrice}" id="price" name="price">
+                            <span>판매가</span>
+                            <span th:text="${goods.goodsPrice}">1</span><span>원</span>
+                            <span class="text-decoration-line-through">(원래 상품가격)</span>
+                        </div>
+                        <p class="lead" th:text="${goods.goodsDetail}">상품 상세 설명</p>
+                        <div class="input-group-prepend">
+                            <span>수량</span>
+                            <input type="number" name="count" id="count" class="form-control" value="1" min="1">
+                            <div class="text-right mgt-50">
+                                <h5>결제 금액</h5>
+                                <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex purchase-btn-wrap" th:if="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}">
+                            <button class="btn btn-default flex-shrink-0 cart" type="button" onclick="addCart()">
+                                <i class="bi-bag-check-fill me-1"></i>
+                                장바구니
+                            </button>
+                            <button class="btn btn-primary flex-shrink-0" type="button" onclick="order()">
+                                <i class="bi-check-square-fill me-1"></i>
+                                바로 구매
+                            </button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <div th:each="goodsImg : ${goods.goodsImageList}" class="text-center">
+            <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}" th:src="${goodsImg.imgUrl}" class="rounded mgb-15" width="800">
+        </div>
+    </div>
+
+
+</div>
+
 </html>

@@ -23,6 +23,7 @@ public class GoodsImageDTO {
     private static ModelMapper modelMapper = new ModelMapper();
 
     public static GoodsImageDTO of(GoodsImage goodsImage){
+        //이미지 정보를 DTO로 매핑
         return modelMapper.map(goodsImage, GoodsImageDTO.class);
     }
 
