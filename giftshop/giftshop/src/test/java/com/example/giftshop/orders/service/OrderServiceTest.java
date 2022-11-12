@@ -3,7 +3,6 @@ package com.example.giftshop.orders.service;
 import com.example.giftshop.goods.constant.GoodsSellStatus;
 import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.repository.GoodsRepository;
-import com.example.giftshop.member.dto.MemberFormDTO;
 import com.example.giftshop.member.entity.Member;
 import com.example.giftshop.member.repository.MemberRepository;
 import com.example.giftshop.orders.OrderDTO.OrderDTO;
@@ -60,7 +59,7 @@ class OrderServiceTest {
 
     @Test
     @DisplayName("주문 테스트")
-    public void orderOne(){
+    public void order(){
         Goods goods = saveGoods();
         Member member = saveMember();
 
@@ -69,7 +68,7 @@ class OrderServiceTest {
         orderDTO.setGoodsId(goods.getId());
         System.out.println("-----------------------" + goods.getGoodsName());
         System.out.println("-----------------------" + member.getEmail());
-        Long orderId = orderService.orderOne(orderDTO, member.getEmail());
+        Long orderId = orderService.order(orderDTO, member.getEmail());
         Orders order = ordersRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
 
@@ -89,7 +88,7 @@ class OrderServiceTest {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setCount(10);
         orderDTO.setGoodsId(item.getId());
-        Long orderId = orderService.orderOne(orderDTO, member.getEmail());
+        Long orderId = orderService.order(orderDTO, member.getEmail());
 
         Orders order = ordersRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);

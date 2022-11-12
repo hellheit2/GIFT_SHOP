@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderHistDTO {
+public class OrderHistoryDTO {
 
     private Long orderId; //주문 번호
     private String orderDate; //주문날짜
@@ -15,7 +15,7 @@ public class OrderHistDTO {
 
     private List<OrderGoodsDTO> orderGoodsDTOList = new ArrayList<>(); //주문 리스트
 
-    public OrderHistDTO(Orders order){
+    public OrderHistoryDTO(Orders order){
         this.orderId = order.getId();
         this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.orderStatus = order.getOrderStatus();
