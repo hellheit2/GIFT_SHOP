@@ -8,8 +8,9 @@
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 
-<!-- 사용자 CSS 추가 -->
+<!-- CSS 추가 -->
 <th:block layout:fragment="css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     .content-mg{
       margin-left:30%;
@@ -41,20 +42,21 @@
   </style>
 </th:block>
 
-<!-- 사용자 스크립트 추가 -->
+<!-- JS 추가 -->
 <th:block layout:fragment="script">
 
   <script th:inline="javascript">
     function cancelOrder(orderId) {
-      let token = $("meta[name='_csrf']").attr("content");
+      //주문 취소
+      let token = $("meta[name='_csrf']").attr("content"); //csrf 토큰 확인
       let header = $("meta[name='_csrf_header']").attr("content");
 
-      let url = "/order/" + orderId + "/cancel";
-      let paramData = {
+      let url = "/order/" + orderId + "/cancel"; //컨트롤러 요청 url
+      let paramData = { //주문 정보
         orderId : orderId,
       };
 
-      let param = JSON.stringify(paramData);
+      let param = JSON.stringify(paramData); //json형식으로 변경
 
       $.ajax({
         url      : url,
@@ -62,7 +64,7 @@
         contentType : "application/json",
         data     : param,
         beforeSend : function(xhr){
-          /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+          // 데이터를 전송하기 전에 헤더에 csrf값을 설정
           xhr.setRequestHeader(header, token);
         },
         dataType : "json",
@@ -72,9 +74,9 @@
           location.href='/orders/' + [[${page}]];
         },
         error : function(jqXHR, status, error){
-          if(jqXHR.status == '401'){
+          if(jqXHR.status == '401'){ //401 권한 없음
             alert('로그인 후 이용해주세요');
-            location.href='/members/login';
+            location.href='/members/login'; //로그인 페이지로 이동
           } else{
             alert(jqXHR.responseText);
           }
@@ -107,7 +109,7 @@
     <div class="card d-flex">
       <div th:each="orderGoods : ${order.orderGoodsDTOList}" class="d-flex mb-3">
         <div class="repImgDiv">
-          <img th:src="${orderGoods.imgUrl}" class = "rounded repImg" th:alt="${orderGoods.goodsName}">
+          <img th:src="${orderGoods.imgUrl}" class="rounded repImg" th:alt="${orderGoods.goodsName}">
         </div>
         <div class="align-self-center w-75">
           <span th:text="${orderGoods.goodsName}" class="fs24 font-weight-bold"></span>

@@ -1,7 +1,7 @@
 package com.example.giftshop.orders.service;
 
-import com.example.giftshop.orders.OrderDTO.OrderDTO;
-import com.example.giftshop.orders.OrderDTO.OrderHistoryDTO;
+import com.example.giftshop.orders.dto.OrderDTO;
+import com.example.giftshop.orders.dto.OrderHistoryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,5 +13,5 @@ public interface OrderService {
     public Page<OrderHistoryDTO> getOrderList(String email, Pageable pageable);
     public boolean validateOrder(Long orderId, String email);
     public void cancelOrder(Long orderId);
-    public Long orderMany(List<OrderDTO> orderDTOList, String email);
+    public Long orderByCart(List<OrderDTO> orderDTOList, String email);
 }

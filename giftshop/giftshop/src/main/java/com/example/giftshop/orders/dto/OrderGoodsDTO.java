@@ -1,7 +1,11 @@
-package com.example.giftshop.orders.OrderDTO;
+package com.example.giftshop.orders.dto;
 
 import com.example.giftshop.orders.entity.OrderGoods;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class OrderGoodsDTO {
 
     private String goodsName; //상품명

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.content-mg{
+    margin-left:25%;
+    margin-right:25%;
+    margin-top:2%;
+    margin-bottom:100px;
+}
+.repImgDiv{
+    margin-right:15px;
+    margin-left:15px;
+    height:auto;
+}
+.repImg{
+    height:100px;
+    width:100px;
+}
+.fs18{
+    font-size:18px
+}
+.fs24{
+    font-size:24px
+}
+
+.sel{
+    width:15%;
+}
+.g-tbl-info{
+    width:70%;
+}
+.g-tbl-table{
+    width:15%;
+}
+.close{
+    margin-bottom:8px;
+}

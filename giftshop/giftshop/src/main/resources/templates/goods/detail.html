@@ -35,32 +35,31 @@
         }
 
         function order(){
-            console.log("order()");
 
             //스프링 시큐리티 : POST 요청시 CSRF 토큰 필요
             let token = $("meta[name='_csrf']").attr("content");
             let header = $("meta[name='_csrf_header']").attr("content");
 
-            let url = "/order";
-            let paramData = {
+            let url = "/order"; //컨트롤러 order
+            let paramData = { //주문 정보(상품 아이디, 개수)
                 goodsId : $("#goodsId").val(),
                 count : $("#count").val()
             };
 
-            let param = JSON.stringify(paramData);
+            let param = JSON.stringify(paramData); //json형식으로 변경
 
             $.ajax({
-                url      : url,
-                type     : "POST",
+                url : url,
+                type : "POST",
                 contentType : "application/json",
-                data     : param,
+                data : param,
                 beforeSend : function(xhr){
                     // 데이터를 전송하기 전에 헤더에 csrf값을 설정
                     xhr.setRequestHeader(header, token);
                 },
                 dataType : "json",
-                cache   : false,
-                success  : function(result, status){
+                cache : false,
+                success : function(result, status){
                     alert("주문이 완료 되었습니다.");
                     location.href='/';
                 },
@@ -81,34 +80,34 @@
             let token = $("meta[name='_csrf']").attr("content");
             let header = $("meta[name='_csrf_header']").attr("content");
 
-            let url = "/cart";
-            let paramData = {
+            let url = "/cart"; //컨트롤러 cart
+            let paramData = { //주문 정보(상품 아이디, 개수
                 goodsId : $("#goodsId").val(),
                 count : $("#count").val()
             };
 
+            let param = JSON.stringify(paramData);//json형식으로 변경
 
-            let param = JSON.stringify(paramData);
             $.ajax({
-                url      : url,
-                type     : "POST",
+                url : url,
+                type : "POST",
                 contentType : "application/json",
-                data     : param,
+                data : param,
                 beforeSend : function(xhr){
                     // 데이터를 전송하기 전에 헤더에 csrf값을 설정
                     xhr.setRequestHeader(header, token);
                 },
                 dataType : "json",
-                cache   : false,
-                success  : function(result, status){
+                cache : false,
+                success : function(result, status){
                     alert("상품을 장바구니에 담았습니다.");
-                    location.href='/';
+                    location.href='/cart'; //장바구니 담기 성공 -> 이후 장바구니로 이동 or 계속 쇼핑하기 선택지 모달
                 },
                 error : function(jqXHR, status, error){
 
-                    if(jqXHR.status == '401'){
+                    if(jqXHR.status == '401'){ //로그인 확인
                         alert('로그인 후 이용해주세요');
-                        location.href='/members/login';
+                        location.href='/members/login'; //로그인 창으로 이동
                     } else{
                         alert(jqXHR.responseText);
                     }
@@ -122,12 +121,12 @@
 
 <div layout:fragment="content">
 
-    <!-- Product section-->
-    <section class="py-5">
+
+    <section class="py-5 goods-info-main">
         <input type="hidden" id="goodsId" th:value="${goods.id}">
-        <div class="container px-4 px-lg-5 my-5">
+        <div class="container px-4 px-lg-5 my-5 goods-info-wrap">
             <div class="row gx-4 gx-lg-5 align-items-center goods-wrap">
-                <div class="col-md-6">
+                <div class="col-md-6 goods-main-img">
                     <img class="card-img-top mb-5 mb-md-0" th:src="${goods.goodsImageList[0].imgUrl}" th:alt="${goods.goodsName}" />
                 </div>
                 <div class="col-md-6 goods-info">
@@ -138,42 +137,59 @@
                             품절
                         </span>
                     <h2 class="fw-bolder goods-title" th:text="${goods.goodsName}">상품 제목</h2>
-                        <div class="fs-5 mb-5 goods-price">
-                            <input type="hidden" th:value="${goods.goodsPrice}" id="price" name="price">
-                            <span>판매가</span>
-                            <span th:text="${goods.goodsPrice}">1</span><span>원</span>
-                            <span class="text-decoration-line-through">(원래 상품가격)</span>
+                    <div class="fs-5 mb-5 goods-price">
+                        <input type="hidden" th:value="${goods.goodsPrice}" id="price" name="price">
+                        <span>판매가</span>
+                        <span th:text="${goods.goodsPrice}">1</span><span>원</span>
+                        <span class="text-decoration-line-through">(원래 상품가격)</span>
+                    </div>
+                    <p class="lead" th:text="${goods.goodsDetail}">상품 상세 설명</p>
+                    <div class="input-group-prepend">
+                        <span>수량</span>
+                        <input type="number" name="count" id="count" class="form-control" value="1" min="1">
+                        <div class="text-right mgt-50 total">
+                            <p>총 결제 금액</p>
+                            <p name="totalPrice" id="totalPrice" class="font-weight-bold"></p>
                         </div>
-                        <p class="lead" th:text="${goods.goodsDetail}">상품 상세 설명</p>
-                        <div class="input-group-prepend">
-                            <span>수량</span>
-                            <input type="number" name="count" id="count" class="form-control" value="1" min="1">
-                            <div class="text-right mgt-50">
-                                <h5>결제 금액</h5>
-                                <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="d-flex purchase-btn-wrap" th:if="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}">
-                            <button class="btn btn-default flex-shrink-0 cart" type="button" onclick="addCart()">
-                                <i class="bi-bag-check-fill me-1"></i>
-                                장바구니
-                            </button>
-                            <button class="btn btn-primary flex-shrink-0" type="button" onclick="order()">
-                                <i class="bi-check-square-fill me-1"></i>
-                                바로 구매
-                            </button>
-                        </div>
+                    <div class="d-flex purchase-btn-wrap" th:if="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}">
+                        <button class="btn btn-default flex-shrink-0 cart" type="button" onclick="addCart()">
+                            <i class="bi-bag-check-fill me-1"></i>
+                            장바구니
+                        </button>
+                        <button class="btn btn-primary flex-shrink-0" type="button" onclick="order()">
+                            <i class="bi-check-square-fill me-1"></i>
+                            바로 구매
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div>
-        <div th:each="goodsImg : ${goods.goodsImageList}" class="text-center">
-            <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}" th:src="${goodsImg.imgUrl}" class="rounded mgb-15" width="800">
+    <section class="py-5 goods-dtl">
+        <div class="container px-4 px-lg-5 my-5 tabs">
+            <input id="all" type="radio" name="tab_item" checked>
+            <label class="tab_item" for="all">상품정보</label>
+            <input id="review_tab" type="radio" name="tab_item">
+            <label class="tab_item" for="review_tab">구매후기</label>
+            <input id="qna_tab" type="radio" name="tab_item">
+            <label class="tab_item" for="qna_tab">Q & A</label>
+            <div class="tab_content" id="all_content">
+                <p class="lead" th:text="${goods.goodsDetail}">상품 상세 설명</p>
+                <div th:each="goodsImg : ${goods.goodsImageList}" class="text-center">
+                    <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}" th:src="${goodsImg.imgUrl}" class="rounded mgb-15" width="700">
+                </div>
+            </div>
+            <div class="tab_content" id="review_tab_content">
+                구매 후기
+            </div>
+            <div class="tab_content" id="qna_tab_content">
+                Q & A
+            </div>
         </div>
-    </div>
+    </section>
 
 
 </div>

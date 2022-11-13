@@ -58,7 +58,7 @@
             <tr th:each="goods,status : ${pageInfo.getContent()}">
                 <td th:text="${goods.id}"></td>
                 <td>
-                    <a th:href="'/admin/item/' + ${goods.id}" th:text="${goods.goodsName}"></a>
+                    <a th:href="'/admin/goods/' + ${goods.id}" th:text="${goods.goodsName}"></a>
                 </td>
                 <td th:text="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL} ? '판매중' : '품절'"></td>
                 <td th:text="${goods.createdBy}"></td>

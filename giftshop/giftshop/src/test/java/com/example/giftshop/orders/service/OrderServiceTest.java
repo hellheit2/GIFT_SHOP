@@ -5,7 +5,7 @@ import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.repository.GoodsRepository;
 import com.example.giftshop.member.entity.Member;
 import com.example.giftshop.member.repository.MemberRepository;
-import com.example.giftshop.orders.OrderDTO.OrderDTO;
+import com.example.giftshop.orders.dto.OrderDTO;
 import com.example.giftshop.orders.constant.OrderStatus;
 import com.example.giftshop.orders.entity.OrderGoods;
 import com.example.giftshop.orders.entity.Orders;
@@ -82,20 +82,20 @@ class OrderServiceTest {
     @Test
     @DisplayName("주문 취소 테스트")
     public void cancelOrder(){
-        Goods item = saveGoods();
+        Goods item = saveGoods(); //재고 100개
         Member member = saveMember();
 
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setCount(10);
+        orderDTO.setCount(10); //10개 주문
         orderDTO.setGoodsId(item.getId());
         Long orderId = orderService.order(orderDTO, member.getEmail());
 
         Orders order = ordersRepository.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
-        orderService.cancelOrder(orderId);
+        orderService.cancelOrder(orderId); //주문 취소
 
         assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
-        assertEquals(100, item.getGoodsStock());
+        assertEquals(100, item.getGoodsStock()); //처음과 비교
     }
 
 }

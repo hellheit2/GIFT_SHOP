@@ -1,4 +1,4 @@
-package com.example.giftshop.orders.OrderDTO;
+package com.example.giftshop.orders.dto;
 
 import lombok.Getter;
 import lombok.Setter;

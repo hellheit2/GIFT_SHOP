@@ -22,4 +22,10 @@ public class Cart extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public static Cart createCart(Member member){ //주문자 장바구니
+        Cart cart = new Cart();
+        cart.setMember(member);
+        return cart;
+    }
 }

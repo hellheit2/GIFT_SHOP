@@ -1,5 +1,23 @@
 @charset "UTF-8";
 
+ul{list-style:none;}
+
+.goods-info-main{
+    padding-bottom:0px !important;
+}
+.goods-info-wrap{
+    /* border: 1px solid red; */
+    width:100%;
+}
+.goods-main-img{
+    /* border:1px solid blue; */
+}
+.goods-main-img > img{
+    /* border:1px solid red; */
+    height:500px;
+    object-fit: contain;
+    object-position: center top;
+}
 .goods-wrap{
     /*border:1px solid green;*/
 }
@@ -7,9 +25,33 @@
     /*background-color:pink;*/
 }
 .goods-info{
-    /*border:1px solid blue;*/
-    padding:10px;
-    height:500px;
+    box-shadow: 0 2px 4px 0 #00000025;
+    border: solid 1px #f5f5f5;
+    border-radius:5px;
+    padding:020px;
+    height:auto;
+
+}
+.total{
+    height:50px;
+    line-height:50px;
+}
+.total > p{
+    height:50px;
+    line-height:50px;
+}
+.total > p:nth-of-type(1){
+    width:20%;
+    margin-right:10%;
+    float:left;
+}
+.total > p:nth-of-type(2){
+    text-align:right;
+    font-size:30px;
+    font-weight:bold;
+    float:right;
+    width:70%;
+
 }
 .goods-title{
     border-top:3px solid #999999;
@@ -18,7 +60,6 @@
     border-bottom:1px solid #999999;
 }
 .goods-price{
-    border-bottom:1px solid #999999;
     padding-bottom:12px;
 }
 .goods-price > span{
@@ -27,7 +68,7 @@
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-   opacity: 1;
+    opacity: 1;
 }
 
 .purchase-btn-wrap{width:100%;height:50px;}
@@ -41,3 +82,63 @@ input[type=number]::-webkit-outer-spin-button {
 
 .btn-primary {background: #131922;  color: #ffffff; outline:none; border:none;}
 .btn-primary:hover {background: #0a0c14; color: #ffffff;}
+
+/* 탭 전체 스타일 */
+.goods-dtl{
+    margin-top:0px;
+    padding-top:15px !important;
+}
+.tabs {
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    width:100%;
+    margin: 0 auto;
+
+}
+
+/* 탭 스타일 */
+.tab_item {
+    width: calc(100%/3);
+    height: 50px;
+    border-bottom: 3px solid #333333;
+    background-color: #f8f8f8;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #333333;
+    display: block;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+.tab_item:hover {
+    opacity: 0.75;
+}
+
+/* 라디오 버튼 UI삭제*/
+input[name="tab_item"] {
+    display: none;
+}
+
+/* 탭 컨텐츠 스타일 */
+.tab_content {
+    display: none;
+    padding: 40px 40px 0;
+    clear: both;
+    overflow: hidden;
+}
+
+
+/* 선택 된 탭 콘텐츠를 표시 */
+#all:checked ~ #all_content,
+#review_tab:checked ~ #review_tab_content,
+#qna_tab:checked ~ #qna_tab_content {
+    display: block;
+}
+
+/* 선택된 탭 스타일 */
+.tabs input:checked + .tab_item {
+    background-color: #333333;
+    color: #fff;
+}

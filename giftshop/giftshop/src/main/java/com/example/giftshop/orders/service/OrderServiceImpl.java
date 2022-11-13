@@ -6,9 +6,9 @@ import com.example.giftshop.goods.repository.GoodsImageRepository;
 import com.example.giftshop.goods.repository.GoodsRepository;
 import com.example.giftshop.member.entity.Member;
 import com.example.giftshop.member.repository.MemberRepository;
-import com.example.giftshop.orders.OrderDTO.OrderDTO;
-import com.example.giftshop.orders.OrderDTO.OrderGoodsDTO;
-import com.example.giftshop.orders.OrderDTO.OrderHistoryDTO;
+import com.example.giftshop.orders.dto.OrderDTO;
+import com.example.giftshop.orders.dto.OrderGoodsDTO;
+import com.example.giftshop.orders.dto.OrderHistoryDTO;
 import com.example.giftshop.orders.entity.OrderGoods;
 import com.example.giftshop.orders.entity.Orders;
 import com.example.giftshop.orders.repository.OrdersRepository;
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService{
     private final GoodsImageRepository goodsImgRepository;
 
     public Long order(OrderDTO orderDTO, String email){
-        //주문 1개
+        //상품 주문
         Goods goods = goodsRepository.findById(orderDTO.getGoodsId()) //주문 상품 조회
                 .orElseThrow(EntityNotFoundException::new);
 
@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Transactional(readOnly = true)
     public Page<OrderHistoryDTO> getOrderList(String email, Pageable pageable) {
-
+        //주문 리스트 페이징
         List<Orders> orders = ordersRepository.findOrders(email, pageable); //사용자 주문 조회(페이징)
         Long totalCount = ordersRepository.countOrder(email); //주문 총 개수
 
@@ -79,6 +79,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Transactional(readOnly = true)
     public boolean validateOrder(Long orderId, String email){
+        //주문 유효성 검사
         Member currentMember = memberRepository.findByEmail(email); //로그인 회원 조회
         Orders order = ordersRepository.findById(orderId) //주문 조회
                 .orElseThrow(EntityNotFoundException::new);
@@ -91,26 +92,27 @@ public class OrderServiceImpl implements OrderService{
     }
 
     public void cancelOrder(Long orderId){
+        //주문 취소
         Orders order = ordersRepository.findById(orderId) //주문 조회
                 .orElseThrow(EntityNotFoundException::new);
         order.cancelOrder(); //주문 취소(주문상태 변경, 재고 복구)
     }
 
-    public Long orderMany(List<OrderDTO> orderDTOList, String email){
+    public Long orderByCart(List<OrderDTO> orderDTOList, String email){
+        //장바구니로 상품 주문
+        Member member = memberRepository.findByEmail(email); //회원 정보 확인
+        List<OrderGoods> orderGoodsList = new ArrayList<>(); //주문 리스트
 
-        Member member = memberRepository.findByEmail(email);
-        List<OrderGoods> orderGoodsList = new ArrayList<>();
-
-        for (OrderDTO orderDTO : orderDTOList) {
-            Goods goods = goodsRepository.findById(orderDTO.getGoodsId())
+        for (OrderDTO orderDTO : orderDTOList) { //주문 객체
+            Goods goods = goodsRepository.findById(orderDTO.getGoodsId()) //주문 상품 조회
                     .orElseThrow(EntityNotFoundException::new);
 
-            OrderGoods orderItem = OrderGoods.createOrderGoods(goods, orderDTO.getCount());
-            orderGoodsList.add(orderItem);
+            OrderGoods orderGoods = OrderGoods.createOrderGoods(goods, orderDTO.getCount()); //OrderGoods : 상품 + 개수 정보
+            orderGoodsList.add(orderGoods); //주문 리스트에 추가
         }
 
-        Orders order = Orders.createOrder(member, orderGoodsList);
-        ordersRepository.save(order);
+        Orders order = Orders.createOrder(member, orderGoodsList); //주문 생성
+        ordersRepository.save(order); //주문 저장
 
         return order.getId();
     }

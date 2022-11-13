@@ -1,7 +1,7 @@
 package com.example.giftshop.orders.controller;
 
-import com.example.giftshop.orders.OrderDTO.OrderDTO;
-import com.example.giftshop.orders.OrderDTO.OrderHistoryDTO;
+import com.example.giftshop.orders.dto.OrderDTO;
+import com.example.giftshop.orders.dto.OrderHistoryDTO;
 import com.example.giftshop.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -62,5 +62,16 @@ public class OrderController {
         model.addAttribute("maxPage", 5); //한번에 보일 페이지 크기
 
         return "order/history";
+    }
+
+    @PostMapping("/order/{orderId}/cancel")
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , Principal principal){
+
+        if(!orderService.validateOrder(orderId, principal.getName())){
+            return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+
+        orderService.cancelOrder(orderId);
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 }

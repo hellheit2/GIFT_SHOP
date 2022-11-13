@@ -1,12 +1,16 @@
-package com.example.giftshop.orders.OrderDTO;
+package com.example.giftshop.orders.dto;
 
 import com.example.giftshop.orders.constant.OrderStatus;
 import com.example.giftshop.orders.entity.Orders;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class OrderHistoryDTO {
 
     private Long orderId; //주문 번호

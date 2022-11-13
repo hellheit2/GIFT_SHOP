@@ -61,6 +61,11 @@
 }
 .prevArrow{float:left;}
 .nextArrow{float:right;}
+.prevArrow > img,
+.nextArrow > img{
+    width:54px;
+    height:56px;
+}
 
 /************************ main_category ************************/
 .main_category{
@@ -226,12 +231,6 @@
     line-height:60px;
     font-size:18px;
     color:#ffffff;
-    transform:scale(1);
-    transition:all 0.1s ease-in;
-    
-}
-.product_list > li:hover .percent{
-    transform:scale(1.1);  
 }
 .description > a{
     display:block;
