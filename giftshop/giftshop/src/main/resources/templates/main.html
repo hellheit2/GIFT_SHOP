@@ -53,57 +53,28 @@
 
   <div class="section main_category">
     <div class="contents">
-      <h2>당신을 위한 <b>추천 상품</b><span></span></h2>
+      <h2>당신을 위한 <b>추천 상품</b><span>특별한 날 뭐 선물할지 고민될땐</span></h2>
       <div class="con_wrap">
         <div class="con">
-          <div class="category_img">
-            <img th:src="@{/img/main/product/combucha.jpg}" alt="기능성차" width="330" height="360">
-            <ul>
-              <li><a href="#">콤부차/유기농 새싹보리</a></li>
-              <li><a href="#">기능성차</a></li>
-              <li><a href="#">건강차</a></li>
-              <li><a href="#">프리미엄티</a></li>
-              <li><a href="#">티카페/캡슐티</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <p class="category"></p>
-            <p class="category_name">간편한 분말 스틱형<span>기능성차</span></p>
-          </div>
-        </div><!--con-->
+          <div class="category_img"><img th:src="@{/img/category/birthday.png}" width="200" height="200" alt="생일선물"></div>
+          <p class="category_name">생일선물</p>
+        </div>
         <div class="con">
-          <div>
-            <p class="category">카페용 제품</p>
-            <p class="category_name">Premium Mix Powder<span>프리미엄 파우더</span></p>
-          </div>
-          <div class="category_img">
-            <img th:src="@{/img/main/product/premium_powder.jpg}" alt="카페용 제품" width="330" height="360">
-            <ul>
-              <li><a href="#">프리믹스파우더</a></li>
-              <li><a href="#">피라미드티백</a></li>
-              <li><a href="#">잎차</a></li>
-              <li><a href="#">차분말</a></li>
-            </ul>
-          </div>
-        </div><!--con-->
+          <div class="category_img"><img th:src="@{/img/category/cloth.png}" width="200" height="200" alt="친구선물"></div>
+          <p class="category_name">친구선물</p>
+        </div>
         <div class="con">
-          <div class="category_img">
-            <img th:src="@{/img/main/product/tea.jpg}" alt="콤부차" width="330" height="360">
-            <ul>
-              <li><a href="#">차류</a></li>
-              <li><a href="#">가향블렌딩차</a></li>
-              <li><a href="#">허브차류</a></li>
-              <li><a href="#">곡류 한방차</a></li>
-              <li><a href="#">분말차류</a></li>
-              <li><a href="#">차 추출분말</a></li>
-            </ul>
-          </div>
-          <div>
-            <p class="category">차원료</p>
-            <p class="category_name">TEA<span>잎차</span></p>
-          </div>
-        </div><!--con-->
+          <div class="category_img"><img th:src="@{/img/category/flower.png}" width="200" height="200" alt="기념일선물"></div>
+          <p class="category_name">기념일선물</p>
+        </div>
+        <div class="con">
+          <div class="category_img"><img th:src="@{/img/category/health.png}" width="200" height="200" alt="건강선물"></div>
+          <p class="category_name">건강선물</p>
+        </div>
+        <div class="con">
+          <div class="category_img"><img th:src="@{/img/category/jewelry.png}" width="200" height="200" alt="특별한선물"></div>
+          <p class="category_name">특별한선물</p>
+        </div>
       </div><!--con_wrap-->
     </div><!--contents-->
   </div><!--section main_category-->
@@ -123,9 +94,9 @@
         <th:block th:each="goods, status: ${pageInfo.getContent()}">
           <li>
             <div class="description">
-              <a th:href="'/goods/' +${goods.id}">
+              <a th:href="'/goods/' + ${goods.id}">
                 <p class="prd_img"><img th:src="${goods.imgUrl}" class="card-img-top" th:alt="${goods.goodsName}" height="275"></p>
-                <p class="prd_txt">[[${goods.goodsName}]]</p>
+                <p class="prd_txt" th:title="${goods.goodsName}">[[${goods.goodsName}]]</p>
               </a>
               <!--<div class="percent">(할인율)<span>%</span></div>-->
             </div>

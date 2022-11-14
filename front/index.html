@@ -28,69 +28,79 @@
 
 <body><!---->
     <div id="top">
-        <header id="top_wrap">
-            <nav class="quick">
+        <nav class="quick">
+            <div class="float_wrap">
                 <ul class="quick_wrap">
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <li><a href="#">커뮤니티</a></li>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">고객센터</a></li>
+                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                    <a th:href="@{/admin/goods/register}">상품 등록</a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                    <a th:href="@{/admin/goods-list}">상품 관리</a>
+                </li>
+                <li><a th:href="@{/members/login}">로그인</a></li>
+                <li><a th:href="@{/members/join}">회원가입</a></li>
+                <li><a href="#">커뮤니티</a></li>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">고객센터</a></li>
                 </ul>
-            </nav><!--quick-->  
-        
-            <h1><a href="index.html"><img src="images/main/top/logo_w.png" alt="TEAZEN 로고" width="150" height="77"></a></h1>
-        
+            </div>
+        </nav><!--quick-->
+      
+          <header id="top_wrap">
+            <h1 id="logo"><a th:href="@{/}"><img src="../images/logo.png" alt="로고" width="178" height="39"></a></h1>
+      
             <nav class="main_navi">
-                <ul class="menu">
-                    <li><a href="#">카테고리</a>
-                        <ul class="sub">
-                            <li><a href="#">티젠상품모두보기</a></li>
-                            <li><a href="#">콤부차</a></li>
-                            <li><a href="#">기능성 TEA스틱</a></li>
-                            <li><a href="#">프리미엄 파우더</a></li>
-                            <li><a href="#">잎차</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">특별기획</a>
-                        <ul class="sub">
-                            <li><a href="#">티젠몰 특가전</a></li>
-                            <li><a href="#">티젠 선물세트</a></li>
-                            <li><a href="#">티웨어/소품</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">할인상품</a>
-                        <ul class="sub">
-                            <li><a href="#">유통 임박 SALE</a></li>
-                            <li><a href="#">대량구매 SALE</a></li>
-                            <li><a href="#">유리다구류 SALE</a></li>
-                            <li><a href="#">무료배송 상품</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">커뮤니티</a>
-                        <ul class="sub">
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">자주하는 질문</a></li>
-                            <li><a href="#">티젠 생생리뷰</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">마이페이지</a>
-                        <ul class="sub">
-                            <li><a href="#">장바구니</a></li>
-                            <li><a href="#">주문배송</a></li>
-                            <li><a href="#">관심 상품</a></li>
-                            <li><a href="#">쿠폰 등록</a></li>
-                        </ul>
-                    </li>
-                </ul>
+              <ul class="menu">
+                <li><a href="#">카테고리</a>
+                  <ul class="sub">
+                    <li><a href="#">티젠상품모두보기</a></li>
+                    <li><a href="#">콤부차</a></li>
+                    <li><a href="#">기능성 TEA스틱</a></li>
+                    <li><a href="#">프리미엄 파우더</a></li>
+                    <li><a href="#">잎차</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">특별기획</a>
+                  <ul class="sub">
+                    <li><a href="#">티젠몰 특가전</a></li>
+                    <li><a href="#">티젠 선물세트</a></li>
+                    <li><a href="#">티웨어/소품</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">할인상품</a>
+                  <ul class="sub">
+                    <li><a href="#">유통 임박 SALE</a></li>
+                    <li><a href="#">대량구매 SALE</a></li>
+                    <li><a href="#">유리다구류 SALE</a></li>
+                    <li><a href="#">무료배송 상품</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">커뮤니티</a>
+                  <ul class="sub">
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">자주하는 질문</a></li>
+                    <li><a href="#">티젠 생생리뷰</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">마이페이지</a>
+                  <ul class="sub">
+                    <li><a href="#">장바구니</a></li>
+                    <li><a href="#">주문배송</a></li>
+                    <li><a href="#">관심 상품</a></li>
+                    <li><a href="#">쿠폰 등록</a></li>
+                  </ul>
+                </li>
+              </ul>
             </nav><!--main_navi-->
             <div class="q_join">
-                <ul class="q_join_wrap">
-                    <li><a href="login.html">LOGIN</a></li>
-                    <li><a href="join.html">JOIN</a></li>
-                </ul><!--join-->
-            </div>   
-        </header><!--top_wrap-->
+              <ul class="q_join_wrap">
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/members/logout}">로그아웃</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/members/mypage}">마이페이지</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/members/login}">LOGIN</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/members/join}">JOIN</a></li>
+              </ul><!--join-->
+            </div>
+          </header><!--top_wrap-->
     </div><!--top-->
 
     <div class="section main_slider show">

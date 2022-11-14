@@ -3,96 +3,104 @@
 #top{
     width:100%;
     min-width:1200px;
-    height:120px;
-    background:#3c5441;/*#435d49;*/
+    height:60px;
+    background:#ffffff;/*#435d49;*/
     opacity:0.9;
     z-index:10;
-
 }
-#top_wrap{
+#top #top_wrap{
     width:1200px;
-    height:120px;
+    height:60px;
     margin:0 auto;
 }
-.quick{
-    width:1200px;
-    height:15px;
+#top .quick{
+    width:100%;
+    min-width:1200px;
+    height:30px;
     text-align:center;
-    line-height:15px;
+    line-height:30px;
     margin-bottom:8px;
+    border-bottom:1px solid #aaaaaa;
 }
-.quick_wrap{
+#top .float_wrap{
+    width:1200px;
+    margin:0 auto;
+    height:30px;
+}
+#top .quick_wrap{
+    width:auto;
+    margin:0 auto;
+    height:30px;
     float:right;
-    height:15px;
 }
-.quick_wrap li{
+#top .quick_wrap li{
     float:left;
     height:15px;
 /*    border-left:2px solid #99aa9a;*/
     padding-left:6px;
     margin:0 3px;
 }
-.quick_wrap li:first-child{
+#top .quick_wrap li:first-child{
     border-left:none;
     padding-left:0px;
 }
-.quick_wrap li a{
+#top .quick_wrap li a{
     font-size:14px;
     height:15px;
-    color:#c2cfc3;
+    color:#666666;
 }
-.quick_wrap li a:hover{
+#top .quick_wrap li a:hover{
     text-decoration:underline;
-    color:#ececec;
+    color:#333333;
 }
 
-#top_wrap h1{
+#top #top_wrap h1{
     float:left;
-    width:150px;
-    height:77px;
+    width:180px;
+    height:40px;
     margin-right:20px;
+    margin-top:10px;
 }
 
-.main_navi{
+#top .main_navi{
     float:left;
     width:700px;
-    height:77px;
-    margin-top:20px;
+    height:40px;
     position:relative;
     z-index:10;
 }
-.menu{
+#top .menu{
     width:700px;
-    height:77px;
+    height:40px;
     text-align:center;
 }
-.menu > li{
+#top .menu > li{
     float:left;
     width:140px;
-    height:77px;
+    height:40px;
     position:relative;
 }
-.menu > li > a{
+#top .menu > li > a{
     display:block;
-    margin-top:22px;
+    margin-top:5px;
     width:140px;
     height:50px;
     line-height:50px;
-    color:#ececec;/*#58745f;*/
+    color:#666666;/*#58745f;*/
     font-size:18px;
     transition:all 0.2s ease-in;
 }
 
-.menu > li:nth-child(1):hover > a{color:#ffcc33;}
-.menu > li:nth-child(2):hover > a{color:#00cc99;}
-.menu > li:nth-child(3):hover > a{color:#0099ff;}
-.menu > li:nth-child(4):hover > a{color:#66ccff;}
-.menu > li:nth-child(5):hover > a{color:#cc00ff;}
-.menu > li > a:hover{
-    border-bottom:5px solid #ececec;
+#top.menu > li:nth-child(1):hover > a{color:#ffcc33;}
+#top .menu > li:nth-child(2):hover > a{color:#00cc99;}
+#top .menu > li:nth-child(3):hover > a{color:#0099ff;}
+#top .menu > li:nth-child(4):hover > a{color:#66ccff;}
+#top .menu > li:nth-child(5):hover > a{color:#cc00ff;}
+#top .menu > li > a:hover{
+    border-bottom:5px solid #666666;
 }
 
-.bg{
+#top .bg{
     position:absolute;
     left:0;
     top:77px;
@@ -101,7 +109,7 @@
     background-color:#ffffff;
     z-index:10;
 }
-.menu > li > .sub{
+#top .menu > li > .sub{
     position:absolute;
     left:0;
     top:60px;
@@ -111,60 +119,58 @@
     height:250px;
     box-sizing:border-box;
 }
-.menu > li > .sub > li{
+#top .menu > li > .sub > li{
     width:140px;
     height:40px;
     line-height:40px;
 }
-.menu > li > .sub > li a{
+#top .menu > li > .sub > li a{
     width:140px;
     height:40px;
     font-weight:normal;
     font-size:15px;
     display:block;
 }
-.menu > li > .sub > li a:hover{
+#top .menu > li > .sub > li a:hover{
     color:#000000;
     font-weight:bold;
 }
-.ln{
+#top .ln{
     position:absolute;
     left:0px;
     top:90px;
     width:1px;
     height:200px;
     display:block;
-    background:#cecece;
+    background:#666666;
     z-index:20;
 }
 
-
-.q_join{
+#top .q_join{
     float:right;
     width:200px;
-    height:77px;
-    margin-top:20px;
+    height:60px;
 }
-.q_join_wrap{
+#top .q_join_wrap{
     width:200px;
-    height:77px;
+    height:40px;
     text-align:center;
 }
-.q_join_wrap li{
+#top .q_join_wrap li{
     float:left;
     width:100px;
-    height:77px;
+    height:40px;
 }
-.q_join_wrap li a{
+#top .q_join_wrap li a{
     display:block;
-    margin-top:22px;
+    margin-top:5px;
     width:100px;
     height:50px;
     line-height:50px;
-    color:#ececec;/*#99aa9a;*/
+    color:#666666;/*#99aa9a;*/
     font-size:18px;
     transition:all 0.2s;
 }
-.q_join_wrap li a:hover{
-    border-bottom:5px solid #ececec;
+#top .q_join_wrap li a:hover{
+    border-bottom:5px solid #666666;
 }

@@ -21,7 +21,7 @@ public class MainController {
     @GetMapping(value="/")
     public String main(GoodsSearchDTO goodsSearchDTO, Optional<Integer> page, Model model){
 
-        Pageable pageable = PageRequest.of((page.isPresent() ? page.get() : 0), 6);
+        Pageable pageable = PageRequest.of((page.isPresent() ? page.get() : 0), 4);
         Page<MainGoodsDTO> pageInfo = goodsService.getMainGoodsPage(goodsSearchDTO,pageable);
 
         model.addAttribute("pageInfo", pageInfo);

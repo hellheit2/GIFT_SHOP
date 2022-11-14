@@ -3,31 +3,40 @@
 #top{
     width:100%;
     min-width:1200px;
-    height:120px;
-    background:#3c5441;/*#435d49;*/
+    height:60px;
+    background:#ffffff;/*#435d49;*/
     opacity:0.9;
     z-index:10;
 }
 #top #top_wrap{
     width:1200px;
-    height:120px;
+    height:60px;
     margin:0 auto;
 }
 #top .quick{
-    width:1200px;
-    height:15px;
+    width:100%;
+    min-width:1200px;
+    height:30px;
     text-align:center;
-    line-height:15px;
+    line-height:30px;
     margin-bottom:8px;
+    border-bottom:1px solid #aaaaaa;
+}
+#top .float_wrap{
+    width:1200px;
+    margin:0 auto;
+    height:30px;
 }
 #top .quick_wrap{
+    width:auto;
+    margin:0 auto;
+    height:30px;
     float:right;
-    height:15px;
 }
 #top .quick_wrap li{
     float:left;
     height:15px;
-/*    border-left:2px solid #99aa9a;*/
+    /*    border-left:2px solid #99aa9a;*/
     padding-left:6px;
     margin:0 3px;
 }
@@ -38,46 +47,46 @@
 #top .quick_wrap li a{
     font-size:14px;
     height:15px;
-    color:#c2cfc3;
+    color:#666666;
 }
 #top .quick_wrap li a:hover{
     text-decoration:underline;
-    color:#ececec;
+    color:#333333;
 }
 
 #top #top_wrap h1{
     float:left;
-    width:150px;
-    height:77px;
+    width:180px;
+    height:40px;
     margin-right:20px;
+    margin-top:10px;
 }
 
 #top .main_navi{
     float:left;
     width:700px;
-    height:77px;
-    margin-top:20px;
+    height:40px;
     position:relative;
     z-index:10;
 }
 #top .menu{
     width:700px;
-    height:77px;
+    height:40px;
     text-align:center;
 }
 #top .menu > li{
     float:left;
     width:140px;
-    height:77px;
+    height:40px;
     position:relative;
 }
 #top .menu > li > a{
     display:block;
-    margin-top:22px;
+    margin-top:5px;
     width:140px;
     height:50px;
     line-height:50px;
-    color:#ececec;/*#58745f;*/
+    color:#666666;/*#58745f;*/
     font-size:18px;
     transition:all 0.2s ease-in;
 }
@@ -88,13 +97,13 @@
 #top .menu > li:nth-child(4):hover > a{color:#66ccff;}
 #top .menu > li:nth-child(5):hover > a{color:#cc00ff;}
 #top .menu > li > a:hover{
-    border-bottom:5px solid #ececec;
+    border-bottom:5px solid #666666;
 }
 
 #top .bg{
     position:absolute;
     left:0;
-    top:77px;
+    top:60px;
     width:700px;
     height:250px;
     background-color:#ffffff;
@@ -123,7 +132,7 @@
     display:block;
 }
 #top .menu > li > .sub > li a:hover{
-    color:#000000;
+    color:#999999;
     font-weight:bold;
 }
 #top .ln{
@@ -133,37 +142,35 @@
     width:1px;
     height:200px;
     display:block;
-    background:#cecece;
+    background:#666666;
     z-index:20;
 }
-
 
 #top .q_join{
     float:right;
     width:200px;
-    height:77px;
-    margin-top:20px;
+    height:60px;
 }
 #top .q_join_wrap{
     width:200px;
-    height:77px;
+    height:40px;
     text-align:center;
 }
 #top .q_join_wrap li{
     float:left;
     width:100px;
-    height:77px;
+    height:40px;
 }
 #top .q_join_wrap li a{
     display:block;
-    margin-top:22px;
+    margin-top:5px;
     width:100px;
     height:50px;
     line-height:50px;
-    color:#ececec;/*#99aa9a;*/
+    color:#666666;/*#99aa9a;*/
     font-size:18px;
     transition:all 0.2s;
 }
 #top .q_join_wrap li a:hover{
-    border-bottom:5px solid #ececec;
+    border-bottom:5px solid #666666;
 }

@@ -5,8 +5,8 @@
 
   <div th:fragment="header" id="top">
 
-    <header id="top_wrap">
-      <nav class="quick">
+    <nav class="quick">
+      <div class="float_wrap">
         <ul class="quick_wrap">
           <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
             <a th:href="@{/admin/goods/register}">상품 등록</a>
@@ -20,9 +20,11 @@
           <li><a href="#">공지사항</a></li>
           <li><a href="#">고객센터</a></li>
         </ul>
-      </nav><!--quick-->
+      </div>
+    </nav><!--quick-->
 
-      <h1><a th:href="@{/}"><img src="images/main/top/logo_w.png" alt="TEAZEN 로고" width="150" height="77"></a></h1>
+    <header id="top_wrap">
+      <h1 id="logo"><a th:href="@{/}"><img th:src="@{/img/logo.png}" alt="로고" width="178" height="39"></a></h1>
 
       <nav class="main_navi">
         <ul class="menu">
