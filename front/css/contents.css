@@ -155,14 +155,14 @@
 
 /************************ main_hot ************************/
 .main_hot{
-    height:600px;
-    padding-top:50px;
-    padding-bottom:30px;
+    height:auto;
+    padding-top:25px;
+    padding-bottom:50px;
     background-color:#e7f0ed;
 }
 .hot_items{
     width:1200px;
-    height:518px;
+    height:auto;
     margin:0 auto;
 }
 .product_tab{
@@ -203,17 +203,18 @@
 .product_list{
     clear:both;
     width:1200px;
-    height:420px;
+    height:350px;
 }
 .product_list > li{
     float:left;
     background-color:#ffffff;
+    height:350px;
     margin-right:20px;
 }
-.product_list > li:first-child{margin-left:20px;}
+.product_list > li:nth-child(1){margin-left:20px;}
 .description{
     width:275px;
-    height:360px;
+    height:305px;
     margin-bottom:10px;
     position:relative;
 }
@@ -238,7 +239,7 @@
 .description > a{
     display:block;
     width:275px;
-    height:360px;
+    height:350px;
 }
 .prd_img{
     width:275px;
@@ -249,33 +250,26 @@
 }
 .product_list > li .prd_img img{
     transform:scale(1);
-    transition:all 0.1s ease-in;
+    transition:all 0.3s ease-in;
 }
 .product_list > li:hover .prd_img img{
-    transform:scale(1.05); 
+    transform:scale(1.03); 
 }
 .prd_txt{
     width:275px;
-    height:50px;
+    height:30px;
     font-size:18px;
     font-weight:bold;
     text-align:center;
 }
-.prd_txt span{
-    display:block;
-    font-weight:normal;
-    line-height:2.2em;
-    color:#666666;
-    font-size:14px;
-}
 .product_list > li:hover .prd_txt{color:#777777;}
 .prd_price{
-    height:50px;
+    height:30px;
     text-align:center;
     font-size:18px;
 }
 .prd_price > .sale{
-    font-size:22px;
+    font-size:18px;
     font-weight:bold;
     display:inline-block;
     margin-right:10px;

@@ -7,9 +7,12 @@
 
   <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
   <script th:src="@{/js/jquery-ui-1.10.4.custom.min.js}"></script>
-  <link rel="stylesheet" th:href="@{/css/reset.css}">
+  <script th:src="@{/js/top.js}"></script>
+
   <th:block layout:fragment="script"></th:block>
   <th:block layout:fragment="css"></th:block>
+  <link rel="stylesheet" th:href="@{/css/reset.css}">
+  <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
 <body>
   <div th:replace="fragments/header::header"></div>

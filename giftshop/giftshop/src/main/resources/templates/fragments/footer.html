@@ -1,7 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-  <div th:fragment="footer">
-    footer 영역
+  <div th:fragment="footer" id="bottom">
+    <footer class="bottom_wrap">
+      <div class="info customer">
+        <h3>CUSTOMER CENTER</h3>
+        <p>010-1234-5678</p>
+        <ul class="time_info">
+          <li><strong>평일</strong>오전 09:00 ~ 오후 06:00</li>
+          <li><strong>점심</strong>오후 12:00 ~ 오후 01:00</li>
+          <li><strong>휴무</strong>토/일/공휴일</li>
+        </ul>
+      </div>
+      <div class="info company">
+        <h3>COMPANY INFO</h3>
+        <ul class="company_info">
+          <li>
+            <ul>
+              <li><strong>회사명</strong>(주)오다주웠다</li>
+              <li><strong>대표</strong>홍길동</li>
+              <li><strong>전화</strong>010-1234-5678</li>
+              <li><strong>팩스</strong>031-123-4567</li>
+            </ul>
+          </li>
+          <li><strong>주소</strong>경기도 안산시 상록구 광덕1로</li>
+          <li>
+            <ul>
+              <li><strong>사업자 등록번호</strong>000-00-00000</li>
+              <li><strong>통신판매업 신고</strong>2022-대한민국-0000</li>
+            </ul>
+          </li>
+          <li><strong>개인정보 관리 책임자</strong>홍길동(hong@gildong.co.kr)</li>
+        </ul>
+        <p>COPYRIGHT &copy; 2022 ODAJUUM ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="bottom_img">
+        <!-- <p><img src="images/bottom/foot_logo.jpg" alt="하단로고 TEAZEN" width="171" height="34"></p> -->
+      </div>
+    </footer>
   </div>
 </html>

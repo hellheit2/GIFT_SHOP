@@ -123,14 +123,14 @@
         <th:block th:each="goods, status: ${pageInfo.getContent()}">
           <li>
             <div class="description">
-              <a href="#">
+              <a th:href="'/goods/' +${goods.id}">
                 <p class="prd_img"><img th:src="${goods.imgUrl}" class="card-img-top" th:alt="${goods.goodsName}" height="275"></p>
                 <p class="prd_txt">[[${goods.goodsName}]]</p>
               </a>
               <!--<div class="percent">(할인율)<span>%</span></div>-->
             </div>
             <div class="prd_price">
-              <p class="sale">할인가 : [[${goods.goodsPrice}]] 원</p>
+              <p class="sale">판매가격 : [[${goods.goodsPrice}]] 원</p>
               <!--<p class="price">(일반 가격))원</p>-->
             </div>
           </li>
@@ -143,22 +143,6 @@
   <input type="hidden" name="searchQuery" th:value="${goodsSearchDTO.searchQuery}">
   <div th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}" class="center">
     <p class="h3 font-weight-bold" th:text="${goodsSearchDTO.searchQuery} + '검색 결과'"></p>
-  </div>
-
-  <div class="row">
-    <th:block th:each="goods, status: ${pageInfo.getContent()}">
-      <div class="col-md-4 margin">
-        <div class="card">
-          <a th:href="'/goods/' +${goods.id}" class="text-dark">
-            <img th:src="${goods.imgUrl}" class="card-img-top" th:alt="${goods.goodsName}" height="400">
-            <div class="card-body">
-              <h4 class="card-title">[[${goods.goodsName}]]</h4>
-              <h3 class="card-title text-danger">[[${goods.goodsPrice}]]원</h3>
-            </div>
-          </a>
-        </div>
-      </div>
-    </th:block>
   </div>
 
   <div th:with="start=${(pageInfo.number/maxPage)*maxPage + 1}, end=(${(pageInfo.totalPages == 0) ? 1 : (start + (maxPage - 1) < pageInfo.totalPages ? start + (maxPage - 1) : pageInfo.totalPages)})" >
