@@ -2,6 +2,15 @@
 
 ul{list-style:none;}
 
+.sell{
+    display:inline-block;
+    background-color:#3e72c0;
+}
+.sold-out{
+    display:inline-block;
+    background-color:#d1377f;
+}
+
 .goods-info-main{
     padding-bottom:0px !important;
 }
@@ -41,8 +50,9 @@ ul{list-style:none;}
     line-height:50px;
 }
 .total > p:nth-of-type(1){
-    width:20%;
+    width:30%;
     margin-right:10%;
+    font-size:20px;
     float:left;
 }
 .total > p:nth-of-type(2){
@@ -50,20 +60,41 @@ ul{list-style:none;}
     font-size:30px;
     font-weight:bold;
     float:right;
-    width:70%;
+    width:60%;
 
 }
 .goods-title{
+    font-size:30px;
     border-top:3px solid #999999;
     margin-top:5px;
     padding:10px 0;
     border-bottom:1px solid #999999;
 }
 .goods-price{
+    padding-top:10px;
     padding-bottom:12px;
 }
 .goods-price > span{
-    font-size:16px;
+    font-size:20px;
+}
+
+.goods-summery{
+    margin:20px 0;
+}
+
+.goods-count{
+    margin:15px 0;
+}
+.goods-count > span{
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    font-size:20px;
+}
+.goods-count > input{
+    float:right;
+    display:inline-block;
+    width:100px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -83,6 +114,9 @@ input[type=number]::-webkit-outer-spin-button {
 .btn-primary {background: #131922;  color: #ffffff; outline:none; border:none;}
 .btn-primary:hover {background: #0a0c14; color: #ffffff;}
 
+.lead{
+    margin:20px 0;
+}
 /* 탭 전체 스타일 */
 .goods-dtl{
     margin-top:0px;

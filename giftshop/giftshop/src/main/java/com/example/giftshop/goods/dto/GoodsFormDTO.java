@@ -2,11 +2,9 @@ package com.example.giftshop.goods.dto;
 
 import com.example.giftshop.goods.constant.GoodsSellStatus;
 import com.example.giftshop.goods.entity.Goods;
-import com.example.giftshop.goods.entity.GoodsCategory;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

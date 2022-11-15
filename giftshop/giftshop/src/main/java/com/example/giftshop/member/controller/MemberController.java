@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RequestMapping("/members")
@@ -47,7 +48,10 @@ public class MemberController {
     }
 
     @GetMapping(value = "/login")
-    public String memberLogin(){
+    public String memberLogin(HttpServletRequest request){
+        //이전 페이지
+        request.getSession()
+                .setAttribute("referer",request.getHeader("Referer"));
         return "member/loginform";
     }
 

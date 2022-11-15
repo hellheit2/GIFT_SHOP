@@ -230,24 +230,25 @@ $(document).ready(function () {
         }, 1000);
         return false;
     });
-    
+
     $("#chk_same").change(function(){
-        var chk = $("#chk_same").prop("checked");
+        let chk = $("#chk_same").prop("checked");
         if(chk == true){
             $(".chk_box").css({
                 border:"2px solid #4c7651",
-                background:"url(./images/check_i_on.png) no-repeat center center",
+                background:"url(../img/check_i_on.png) no-repeat center center",
                 backgroundSize:"12px 12px"
             });
         }else{
-           $(".chk_box").css({
+            $(".chk_box").css({
                 border:"2px solid #aaaaaa",
-                background:"url(./images/check_i_off.png) no-repeat center center",
+                background:"url(../img/check_i_off.png) no-repeat center center",
                 backgroundSize:"12px 12px"
             });
-            
+
         }
     });
-    
+
+
 
 });

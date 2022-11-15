@@ -1,46 +1,14 @@
 @charset "utf-8";
 
-#login_title{
-    width:100%;
-    min-width:400px;
-    height:150px;
-    margin:0 auto;
-}
-.title_wrap{
-    width:400px;
-    height:123px;
-    margin:0 auto;
-}
-.title_wrap h3{
-    width:200px;
-    height:103px;
-    margin:10px auto;
-}
-.title_wrap p{
-    float:right;
-    width:20px;
-    height:20px;
-    
-}
-.title_wrap p a{
-    width:20px;
-    height:20px;
-    display:block;
-    text-align:center;
-    line-height:19px;
-    font-size:12px;
-    color:#333333;
-    border-radius:50%;
-    background-color:#eaeaea;
-}
-.title_wrap p a:hover{
-    color:#eaeaea;
-    background-color:#666666;
-}
+
 #login_wrap{
+    clear:both;
     width:400px;
-    height:700px;
-    margin:0 auto;
+    height:620px;
+    margin:100px auto;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow:0px 0px 10px 0px #acacac;
 }
 .login{
     width:400px;
@@ -156,13 +124,13 @@
     color:#333333;
     cursor:pointer;
 }
-.btn_wrap li:nth-child(1) > input{background:#f4f4f4 url(../images/sns1.jpg) no-repeat left top;}/*#fad400*/
-.btn_wrap li:nth-child(2) > input{background:#f4f4f4 url(../images/sns2.jpg) no-repeat left top;}/*#00bd38*/
-.btn_wrap li:nth-child(3) > input{background:#f4f4f4 url(../images/sns3.jpg) no-repeat left top;}/*#274883*/
-.btn_wrap li:nth-child(4) > input{background:#f4f4f4 url(../images/truck.png) no-repeat 110px center;background-size:30px 30px;}/*#274883*/
+.btn_wrap li:nth-child(1) > input{background:#f4f4f4 url(../img/sns1.jpg) no-repeat left top;}/*#fad400*/
+.btn_wrap li:nth-child(2) > input{background:#f4f4f4 url(../img/sns2.jpg) no-repeat left top;}/*#00bd38*/
+.btn_wrap li:nth-child(3) > input{background:#f4f4f4 url(../img/sns3.jpg) no-repeat left top;}/*#274883*/
+.btn_wrap li:nth-child(4) > input{background:#f4f4f4 url(../img/truck.png) no-repeat 110px center;background-size:30px 30px;}/*#274883*/
 .btn_wrap li:nth-child(4){margin-top:70px;margin-bottom:0px;position:relative;}
 .btn_wrap li:nth-child(4)::before{
-    content:"이젠 누구나 쉽게 티젠으로";
+    content:"이젠 누구나 쉽게 회원가입 없이도";
     position:absolute;
     left:50%;
     top:-30px;

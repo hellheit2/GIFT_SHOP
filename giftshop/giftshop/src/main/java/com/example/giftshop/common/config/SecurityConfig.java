@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -27,9 +28,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http.formLogin()
                 .loginPage("/members/login")    //로그인 페이지
-                .defaultSuccessUrl("/")         //로그인 성공시 이동
+                .successHandler(successHandler())   //로그인 성공시 이동
                 .usernameParameter("email")     //로그인시 파라미터 email로 설정
                 .failureUrl("/members/login/error")     //로그인 실패시 이동
                 .and()
@@ -48,6 +50,11 @@ public class SecurityConfig {
 
         return http.build();
     }
+    @Bean
+    public AuthenticationSuccessHandler successHandler() { //로그인 성공 시 이동 url 설정
+        return new CustomLoginSuccessHandler("/"); //기본값
+    }
+
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");

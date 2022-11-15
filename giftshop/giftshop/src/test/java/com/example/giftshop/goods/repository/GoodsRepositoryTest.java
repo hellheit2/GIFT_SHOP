@@ -1,15 +1,13 @@
 package com.example.giftshop.goods.repository;
 
+import com.example.giftshop.category.repository.CategoryRepository;
 import com.example.giftshop.goods.constant.GoodsSellStatus;
-import com.example.giftshop.goods.entity.Category;
+import com.example.giftshop.category.entity.Category;
 import com.example.giftshop.goods.entity.Goods;
-import com.example.giftshop.goods.entity.GoodsCategory;
 import com.example.giftshop.goods.entity.QGoods;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +16,7 @@ import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -30,8 +25,6 @@ class GoodsRepositoryTest {
 
     @Autowired
     GoodsRepository goodsRepository;
-    @Autowired
-    CategoryRepository categoryRepository;
     @PersistenceContext
     EntityManager em;
 
@@ -47,19 +40,6 @@ class GoodsRepositoryTest {
 
         Goods savedGoods = goodsRepository.save(goods);
         log.info(savedGoods.toString());
-
-        Category category1 = Category.builder()
-                .id(1L)
-                .categoryName("카테고리1").build();
-
-        Category category2 = Category.builder()
-                .id(2L)
-                .categoryName("카테고리2").build();
-
-        Category savedCategory1 = categoryRepository.save(category1);
-        log.info(savedCategory1.toString());
-        Category savedCategory2 = categoryRepository.save(category2);
-        log.info(savedCategory2.toString());
 
     }
 

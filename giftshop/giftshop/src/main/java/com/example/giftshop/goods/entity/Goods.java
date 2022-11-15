@@ -9,7 +9,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +50,6 @@ public class Goods extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private GoodsSellStatus goodsSellStatus; // 판매 상태
-
-    @OneToMany(mappedBy="goods",fetch=FetchType.EAGER, cascade = CascadeType.ALL) //fetch=FetchType.EAGER
-    private List<GoodsCategory> categoryList = new ArrayList<>(); // 카테고리
 
     //상품 데이터 업데이트
     //엔티티 클래스 비즈니스 로직 -> 객체지향적 코딩

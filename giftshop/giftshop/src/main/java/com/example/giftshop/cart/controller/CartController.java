@@ -26,6 +26,10 @@ public class CartController {
     @PostMapping(value = "/cart")
     public @ResponseBody ResponseEntity order(@RequestBody @Valid CartGoodsDTO cartGoodsDTO,
                                               BindingResult bindingResult, Principal principal){
+
+        System.out.println("장바구니");
+        System.out.println("cartGoodsDTO" + cartGoodsDTO.toString());
+
         //장바구니 추가
         if(bindingResult.hasErrors()){ //CartGoodsDTO 바인딩 에러
             StringBuilder sb = new StringBuilder();

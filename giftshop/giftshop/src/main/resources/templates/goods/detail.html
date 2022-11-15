@@ -13,8 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
     <link th:href="@{/css/goodsdtl.css}" rel="stylesheet" />
-<!--    <link th:href="@{/css/top.css}" rel="stylesheet" />
-    <link th:href="@{/css/bottom.css}" rel="stylesheet" />-->
 </th:block>
 
 !-- JS 추가 -->
@@ -113,7 +111,6 @@
                     } else{
                         alert(jqXHR.responseText);
                     }
-
                 }
             });
         }
@@ -132,10 +129,10 @@
                     <img class="card-img-top mb-5 mb-md-0" th:src="${goods.goodsImageList[0].imgUrl}" th:alt="${goods.goodsName}" />
                 </div>
                 <div class="col-md-6 goods-info">
-                        <span th:if="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}" class="badge badge-primary mgb-15">
+                        <span th:if="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}" class="badge badge-primary mgb-15 sell">
                             판매중
                         </span>
-                    <span th:unless="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}" class="badge btn-danger mgb-15" >
+                        <span th:unless="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL}" class="badge btn-danger mgb-15 sold-out" >
                             품절
                         </span>
                     <h2 class="fw-bolder goods-title" th:text="${goods.goodsName}">상품 제목</h2>
@@ -143,10 +140,10 @@
                         <input type="hidden" th:value="${goods.goodsPrice}" id="price" name="price">
                         <span>판매가</span>
                         <span th:text="${goods.goodsPrice}">1</span><span>원</span>
-                        <span class="text-decoration-line-through">(원래 상품가격)</span>
+                        <!--<span class="text-decoration-line-through">(원래 상품가격)</span>-->
                     </div>
-                    <p class="lead" th:text="${goods.goodsDetail}">상품 상세 설명</p>
-                    <div class="input-group-prepend">
+                    <p class="lead goods-summery" th:text="${goods.goodsDetail}">상품 상세 설명</p>
+                    <div class="input-group-prepend goods-count">
                         <span>수량</span>
                         <input type="number" name="count" id="count" class="form-control" value="1" min="1">
                         <div class="text-right mgt-50 total">
