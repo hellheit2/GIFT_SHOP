@@ -176,3 +176,9 @@ input[name="tab_item"] {
     background-color: #333333;
     color: #fff;
 }
+#top{
+    height:93px !important;
+}
+#bottom{
+    height:220px !important;
+}

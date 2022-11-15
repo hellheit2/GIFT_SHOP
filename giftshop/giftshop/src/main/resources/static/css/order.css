@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+.content-mg{
+    margin: 4% auto;
+    width:750px;
+    min-height:400px;
+}
+.repImgDiv{
+    margin-right:15px;
+    margin-left:15px;
+    height:auto;
+}
+.repImg{
+    height:100px;
+    width:100px;
+}
+.card{
+    width:750px;
+    height:100%;
+    padding:30px;
+    margin-bottom:20px;
+}
+.fs18{
+    font-size:18px
+}
+.fs24{
+    font-size:24px
+}
+
+.order-wrap{
+    width:750px;
+    z-index:-20;
+}
+.order-status{
+    z-index:-10;
+    margin-bottom:5px !important;
+}
+.order-con{
+    z-index:-10;
+}
+.order-date{
+    height:30px;
+    line-height:30px;
+}
+.cancel-btn{
+    height:30px;
+    width:80px;
+    font-size:14px;
+    line-height:15px;
+}
+.canceled{
+    height:30px;
+    line-height:30px;
+}
+.goods-name{
+    display:block;
+    margin-bottom:10px;
+}
+a{
+    text-decoration: none !important;
+}
+#top{
+    height:93px !important;
+}
+#bottom{
+    height:220px !important;
+}

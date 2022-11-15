@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RequestMapping("/members")
 @Controller
@@ -48,7 +49,11 @@ public class MemberController {
     }
 
     @GetMapping(value = "/login")
-    public String memberLogin(HttpServletRequest request){
+    public String memberLogin(HttpServletRequest request, Principal principal){
+        //로그인 상태에서 접근
+        if(principal != null){
+            return "redirect:/";
+        }
         //이전 페이지
         request.getSession()
                 .setAttribute("referer",request.getHeader("Referer"));

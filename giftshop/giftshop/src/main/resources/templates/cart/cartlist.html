@@ -174,12 +174,8 @@
 
 <div layout:fragment="content" class="content-mg">
 
-  <h2 class="mb-4">
-    장바구니 목록
-  </h2>
-
+  <h1 class="mb-4">장바구니 목록</h1>
   <div>
-
     <table class="table">
       <thead>
       <tr class="text-center">
@@ -200,7 +196,7 @@
             <img th:src="${cartGoods.imgUrl}" class = "rounded repImg" th:alt="${cartGoods.goodsName}">
           </div>
           <div class="align-self-center">
-            <span th:text="${cartGoods.goodsName}" class="fs24 font-weight-bold"></span>
+            <span th:text="${cartGoods.goodsName}" class="fs24 font-weight-bold goods-name" th:title="${cartGoods.goodsName}"></span>
             <div class="fs18 font-weight-light">
               <span class="input-group mt-2">
                 <span th:id="'price_' + ${cartGoods.cartGoodsId}"

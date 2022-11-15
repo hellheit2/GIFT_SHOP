@@ -90,6 +90,23 @@ public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
         return new PageImpl<>(results,pageable,total);
     }
 
+    public Page<Goods> getAllGoodsList(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
+
+        List<Goods> results = queryFactory //쿼리 생성
+                .selectFrom(QGoods.goods) //엔티티 지정
+                .orderBy(QGoods.goods.regTime.desc()) //등록일 기준
+                .offset(pageable.getOffset()) //데이터 조회 시작 인덱스
+                .limit(pageable.getPageSize()) //가지고 올 데이터 최대 개수
+                .fetch();
+
+        long total = queryFactory //쿼리 생성
+                .select(Wildcard.count) //카운트
+                .from(QGoods.goods) //엔티티 지정
+                .fetchOne(); // 총 검색 결과
+
+        return new PageImpl<>(results,pageable,total);
+    }
+
     @Override
     public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
         // 메인페이지 상품리스트

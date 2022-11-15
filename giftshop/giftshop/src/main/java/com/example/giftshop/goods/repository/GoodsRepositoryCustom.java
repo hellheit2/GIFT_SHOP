@@ -9,5 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface GoodsRepositoryCustom {
 
     Page<Goods> getAdminGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable);
+    Page<Goods> getAllGoodsList(GoodsSearchDTO goodsSearchDTO, Pageable pageable);
     Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable);
 }

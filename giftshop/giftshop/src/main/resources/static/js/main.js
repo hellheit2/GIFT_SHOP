@@ -44,7 +44,7 @@ function section_2(eval) {
         $(eval).addClass("show");
         $(eval).animate({
             opacity: "1"
-        }, 2000).delay(2000);
+        }, 1500).delay(1500);
     }
     return false;
 }

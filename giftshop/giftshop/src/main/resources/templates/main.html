@@ -116,7 +116,7 @@
     <p class="h3 font-weight-bold" th:text="${goodsSearchDTO.searchQuery} + '검색 결과'"></p>
   </div>
 
-  <div th:with="start=${(pageInfo.number/maxPage)*maxPage + 1}, end=(${(pageInfo.totalPages == 0) ? 1 : (start + (maxPage - 1) < pageInfo.totalPages ? start + (maxPage - 1) : pageInfo.totalPages)})" >
+  <!--<div th:with="start=${(pageInfo.number/maxPage)*maxPage + 1}, end=(${(pageInfo.totalPages == 0) ? 1 : (start + (maxPage - 1) < pageInfo.totalPages ? start + (maxPage - 1) : pageInfo.totalPages)})" >
     <ul class="pagination justify-content-center">
 
       <li class="page-item" th:classappend="${pageInfo.number eq 0}?'disabled':''">
@@ -136,7 +136,7 @@
       </li>
 
     </ul>
-  </div>
+  </div>-->
 </div>
 
 </html>

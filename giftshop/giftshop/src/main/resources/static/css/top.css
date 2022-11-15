@@ -3,9 +3,10 @@
 #top{
     width:100%;
     min-width:1200px;
-    height:60px;
+    height:98px;
     background:#ffffff;/*#435d49;*/
     opacity:0.9;
+    border-bottom:1px solid #666666;
     z-index:10;
 }
 #top #top_wrap{
@@ -99,7 +100,7 @@
 #top .menu > li > a:hover{
     border-bottom:5px solid #666666;
 }
-
+/*
 #top .bg{
     position:absolute;
     left:0;
@@ -144,7 +145,7 @@
     display:block;
     background:#666666;
     z-index:20;
-}
+}*/
 
 #top .q_join{
     float:right;

@@ -11,35 +11,7 @@
 <!-- CSS 추가 -->
 <th:block layout:fragment="css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    .content-mg{
-      margin-left:30%;
-      margin-right:30%;
-      margin-top:2%;
-      margin-bottom:100px;
-    }
-    .repImgDiv{
-      margin-right:15px;
-      margin-left:15px;
-      height:auto;
-    }
-    .repImg{
-      height:100px;
-      width:100px;
-    }
-    .card{
-      width:750px;
-      height:100%;
-      padding:30px;
-      margin-bottom:20px;
-    }
-    .fs18{
-      font-size:18px
-    }
-    .fs24{
-      font-size:24px
-    }
-  </style>
+  <link rel="stylesheet" th:href="@{/css/order.css}">
 </th:block>
 
 <!-- JS 추가 -->
@@ -89,30 +61,28 @@
 
 <div layout:fragment="content" class="content-mg">
 
-  <h2 class="mb-4">
-    구매 이력
-  </h2>
+  <h2 class="mb-4">구매 이력</h2>
 
-  <div th:each="order : ${orders.getContent()}">
+  <div th:each="order : ${orders.getContent()}" class="order-wrap">
 
-    <div class="d-flex mb-3 align-self-center">
-      <h4 th:text="${order.orderDate} + ' 주문'"></h4>
+    <div class="d-flex mb-3 align-self-center order-status">
+      <h4 class="order-date" th:text="${order.orderDate} + ' 주문'"></h4>
       <div class="ml-3">
         <th:block th:if="${order.orderStatus == T(com.example.giftshop.orders.constant.OrderStatus).ORDER}">
-          <button type="button" class="btn btn-outline-secondary" th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
+          <button type="button" class="btn btn-outline-secondary cancel-btn" th:value="${order.orderId}" onclick="cancelOrder(this.value)">주문취소</button>
         </th:block>
         <th:block th:unless="${order.orderStatus == T(com.example.giftshop.orders.constant.OrderStatus).ORDER}">
-          <h4>(취소 완료)</h4>
+          <h4 class="canceled">(취소 완료)</h4>
         </th:block>
       </div>
     </div>
-    <div class="card d-flex">
+    <div class="card d-flex order-con">
       <div th:each="orderGoods : ${order.orderGoodsDTOList}" class="d-flex mb-3">
         <div class="repImgDiv">
           <img th:src="${orderGoods.imgUrl}" class="rounded repImg" th:alt="${orderGoods.goodsName}">
         </div>
         <div class="align-self-center w-75">
-          <span th:text="${orderGoods.goodsName}" class="fs24 font-weight-bold"></span>
+          <span th:text="${orderGoods.goodsName}" class="fs24 font-weight-bold goods-name"></span>
           <div class="fs18 font-weight-light">
             <span th:text="${orderGoods.orderPrice} +'원'"></span>
             <span th:text="${orderGoods.count} +'개'"></span>

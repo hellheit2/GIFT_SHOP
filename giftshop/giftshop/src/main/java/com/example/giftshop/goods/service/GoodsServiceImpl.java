@@ -95,6 +95,13 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     @Transactional(readOnly = true)
+    public Page<Goods> getAllGoodsList(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+        //메인 페이지 상품
+        return goodsRepository.getAllGoodsList(goodsSearchDTO,pageable);
+
+    }
+    @Override
+    @Transactional(readOnly = true)
     public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
         //메인 페이지 상품
         return goodsRepository.getMainGoodsPage(goodsSearchDTO,pageable);
