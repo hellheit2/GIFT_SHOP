@@ -1,5 +1,44 @@
 @charset "utf-8";
 
+#pagination{text-align:center;}
+
+.page_wrap > ul,
+.page_wrap > li {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.page_wrap > li{
+    display:inline-block;
+    width:30px;
+    height:30px;
+    margin: 0 3px;
+}
+
+.page_wrap > .skip{
+    width:50px;
+}
+.page_wrap > li > a{
+    text-decoration:none;
+    color:#999999;
+}
+.active{
+    display:inline-block;
+    text-decoration:none;
+    width:30px;
+    height:30px;
+    line-height:30px;
+    background-color:#999999;
+    border-radius:50%;
+    font-weight:bold;
+}
+.active > a{
+    color:#ffffff !important;
+}
+.disabled, .active{
+    pointer-events: none;
+}
+
 #top{
     width:100%;
     min-width:1200px;

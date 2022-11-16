@@ -4,6 +4,7 @@ import com.example.giftshop.goods.dto.GoodsFormDTO;
 import com.example.giftshop.goods.dto.GoodsSearchDTO;
 import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.service.GoodsService;
+import com.example.giftshop.goods.dto.GoodsWrapDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -133,7 +134,8 @@ public class GoodsController {
         //페이지가 존재할 경우 해당 페이지(page.get()), 아닐 경우 0
         Pageable pageable = PageRequest.of(page.isPresent()? page.get() : 0, 16);
 
-        Page<Goods> pageInfo = goodsService.getAdminGoodsPage(goodsSearchDTO, pageable); //Page 객체
+        Page<GoodsWrapDTO> pageInfo = goodsService.getAllGoodsList(goodsSearchDTO, pageable); //Page 객체
+
         System.out.println(pageInfo.getTotalPages());
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("goodsSearchDTO", goodsSearchDTO);

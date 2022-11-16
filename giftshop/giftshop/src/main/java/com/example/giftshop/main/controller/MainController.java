@@ -2,7 +2,7 @@ package com.example.giftshop.main.controller;
 
 import com.example.giftshop.goods.dto.GoodsSearchDTO;
 import com.example.giftshop.goods.service.GoodsService;
-import com.example.giftshop.main.dto.MainGoodsDTO;
+import com.example.giftshop.goods.dto.GoodsWrapDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +22,7 @@ public class MainController {
     public String main(GoodsSearchDTO goodsSearchDTO, Optional<Integer> page, Model model){
 
         Pageable pageable = PageRequest.of((page.isPresent() ? page.get() : 0), 4);
-        Page<MainGoodsDTO> pageInfo = goodsService.getMainGoodsPage(goodsSearchDTO,pageable);
+        Page<GoodsWrapDTO> pageInfo = goodsService.getMainGoodsPage(goodsSearchDTO,pageable);
 
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("goodsSearchDTO", goodsSearchDTO);

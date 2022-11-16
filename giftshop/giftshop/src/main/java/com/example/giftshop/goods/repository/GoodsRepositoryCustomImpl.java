@@ -2,11 +2,11 @@ package com.example.giftshop.goods.repository;
 
 import com.example.giftshop.goods.constant.GoodsSellStatus;
 import com.example.giftshop.goods.dto.GoodsSearchDTO;
+import com.example.giftshop.goods.dto.QGoodsWrapDTO;
 import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.entity.QGoods;
 import com.example.giftshop.goods.entity.QGoodsImage;
-import com.example.giftshop.main.dto.MainGoodsDTO;
-import com.example.giftshop.main.dto.QMainGoodsDTO;
+import com.example.giftshop.goods.dto.GoodsWrapDTO;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -90,32 +90,15 @@ public class GoodsRepositoryCustomImpl implements GoodsRepositoryCustom{
         return new PageImpl<>(results,pageable,total);
     }
 
-    public Page<Goods> getAllGoodsList(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
-
-        List<Goods> results = queryFactory //쿼리 생성
-                .selectFrom(QGoods.goods) //엔티티 지정
-                .orderBy(QGoods.goods.regTime.desc()) //등록일 기준
-                .offset(pageable.getOffset()) //데이터 조회 시작 인덱스
-                .limit(pageable.getPageSize()) //가지고 올 데이터 최대 개수
-                .fetch();
-
-        long total = queryFactory //쿼리 생성
-                .select(Wildcard.count) //카운트
-                .from(QGoods.goods) //엔티티 지정
-                .fetchOne(); // 총 검색 결과
-
-        return new PageImpl<>(results,pageable,total);
-    }
-
     @Override
-    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
+    public Page<GoodsWrapDTO> getGoodsListPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable) {
         // 메인페이지 상품리스트
         QGoods goods = QGoods.goods;
         QGoodsImage goodsImage = QGoodsImage.goodsImage;
 
-        List<MainGoodsDTO> content = queryFactory
+        List<GoodsWrapDTO> content = queryFactory
                 .select( //@QueryProjection select절에 대상 설정
-                        new QMainGoodsDTO(
+                        new QGoodsWrapDTO(
                                 goods.id,
                                 goods.goodsName,
                                 goods.goodsDetail,

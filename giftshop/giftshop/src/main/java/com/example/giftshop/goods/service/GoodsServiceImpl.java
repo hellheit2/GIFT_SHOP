@@ -8,14 +8,13 @@ import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.entity.GoodsImage;
 import com.example.giftshop.goods.repository.GoodsImageRepository;
 import com.example.giftshop.goods.repository.GoodsRepository;
-import com.example.giftshop.main.dto.MainGoodsDTO;
+import com.example.giftshop.goods.dto.GoodsWrapDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -95,16 +94,16 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Goods> getAllGoodsList(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+    public  Page<GoodsWrapDTO> getAllGoodsList(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
         //메인 페이지 상품
-        return goodsRepository.getAllGoodsList(goodsSearchDTO,pageable);
+        return goodsRepository.getGoodsListPage(goodsSearchDTO,pageable);
 
     }
     @Override
     @Transactional(readOnly = true)
-    public Page<MainGoodsDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
+    public Page<GoodsWrapDTO> getMainGoodsPage(GoodsSearchDTO goodsSearchDTO, Pageable pageable){
         //메인 페이지 상품
-        return goodsRepository.getMainGoodsPage(goodsSearchDTO,pageable);
+        return goodsRepository.getGoodsListPage(goodsSearchDTO,pageable);
 
     }
 }

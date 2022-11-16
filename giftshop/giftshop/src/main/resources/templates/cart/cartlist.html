@@ -172,66 +172,67 @@
 
 </th:block>
 
-<div layout:fragment="content" class="content-mg">
+<div layout:fragment="content">
 
-  <h1 class="mb-4">장바구니 목록</h1>
-  <div>
-    <table class="table">
-      <thead>
-      <tr class="text-center">
-        <td class="sel">
-          <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
-        </td>
-        <td class="g-tbl-info">상품정보</td>
-        <td class="g-tbl-price">상품금액</td>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="cartGoods : ${cartGoodsList}">
-        <td class="text-center align-middle">
-          <input type="checkbox" name="cartChkBox" th:value="${cartGoods.cartGoodsId}">
-        </td>
-        <td class="d-flex">
-          <div class="repImgDiv align-self-center">
-            <img th:src="${cartGoods.imgUrl}" class = "rounded repImg" th:alt="${cartGoods.goodsName}">
-          </div>
-          <div class="align-self-center">
-            <span th:text="${cartGoods.goodsName}" class="fs24 font-weight-bold goods-name" th:title="${cartGoods.goodsName}"></span>
-            <div class="fs18 font-weight-light">
-              <span class="input-group mt-2">
-                <span th:id="'price_' + ${cartGoods.cartGoodsId}"
-                      th:data-price="${cartGoods.price}"
-                      th:text="${cartGoods.price} + '원'" class="align-self-center mr-2">
-                </span>
-                <input type="number" name="count" th:id="'count_' + ${cartGoods.cartGoodsId}"
-                       th:value="${cartGoods.count}" min="1"
-                       onchange="changeCount(this)" class="form-control mr-2" >
-                <button type="button" class="close" aria-label="Close">
-                    <span aria-hidden="true" th:data-id="${cartGoods.cartGoodsId}" onclick="deleteCartGoods(this)">&times;</span>
-                </button>
-              </span>
+  <div class="content-mg section" style="width:910px;margin:50px auto;min-height:550px;min-width:910px;">
+    <h2><b>장바구니</b> 목록</h2>
+    <div>
+      <table class="table">
+        <thead>
+        <tr class="text-center">
+          <td class="sel">
+            <input type="checkbox" id="checkall" onclick="checkAll()"> 전체선택
+          </td>
+          <td class="g-tbl-info">상품정보</td>
+          <td class="g-tbl-price">상품금액</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cartGoods : ${cartGoodsList}">
+          <td class="text-center align-middle">
+            <input type="checkbox" name="cartChkBox" th:value="${cartGoods.cartGoodsId}">
+          </td>
+          <td class="d-flex">
+            <div class="repImgDiv align-self-center">
+              <img th:src="${cartGoods.imgUrl}" class = "rounded repImg" th:alt="${cartGoods.goodsName}">
             </div>
-          </div>
-        </td>
-        <td class="text-center align-middle">
-          <span th:id="'totalPrice_' + ${cartGoods.cartGoodsId}"
-                name="totalPrice" th:text="${cartGoods.price * cartGoods.count} + '원'">
-          </span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+            <div class="align-self-center">
+              <span th:text="${cartGoods.goodsName}" class="fs24 font-weight-bold goods-name" th:title="${cartGoods.goodsName}"></span>
+              <div class="fs18 font-weight-light">
+                <span class="input-group mt-2">
+                  <span th:id="'price_' + ${cartGoods.cartGoodsId}"
+                        th:data-price="${cartGoods.price}"
+                        th:text="${cartGoods.price} + '원'" class="align-self-center mr-2">
+                  </span>
+                  <input type="number" name="count" th:id="'count_' + ${cartGoods.cartGoodsId}"
+                         th:value="${cartGoods.count}" min="1"
+                         onchange="changeCount(this)" class="form-control mr-2" >
+                  <button type="button" class="close" aria-label="Close">
+                      <span aria-hidden="true" th:data-id="${cartGoods.cartGoodsId}" onclick="deleteCartGoods(this)">&times;</span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </td>
+          <td class="text-center align-middle">
+            <span th:id="'totalPrice_' + ${cartGoods.cartGoodsId}"
+                  name="totalPrice" th:text="${cartGoods.price * cartGoods.count} + '원'">
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-    <h2 class="text-center">
-      총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
-    </h2>
+      <h3 class="text-center">
+        총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
+      </h3>
 
-    <div class="text-center mt-3">
-      <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
+      <div class="text-center mt-3">
+        <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
+      </div>
+
     </div>
-
   </div>
-
 </div>
 
 </html>

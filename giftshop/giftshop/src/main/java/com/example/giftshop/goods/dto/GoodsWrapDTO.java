@@ -1,4 +1,4 @@
-package com.example.giftshop.main.dto;
+package com.example.giftshop.goods.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MainGoodsDTO {
+public class GoodsWrapDTO {
 
     private Long id; //상품 번호
 
@@ -19,7 +19,7 @@ public class MainGoodsDTO {
     private Integer goodsPrice; //가격
 
     @QueryProjection
-    public MainGoodsDTO(Long id, String goodsName, String goodsDetail, String imgUrl, Integer goodsPrice) {
+    public GoodsWrapDTO(Long id, String goodsName, String goodsDetail, String imgUrl, Integer goodsPrice) {
         this.id = id;
         this.goodsName = goodsName;
         this.goodsDetail = goodsDetail;

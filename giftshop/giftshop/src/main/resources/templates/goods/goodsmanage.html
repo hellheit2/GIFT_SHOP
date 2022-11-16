@@ -7,6 +7,15 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        a{
+            text-decoration: none !important;
+        }
+        #top{
+            height:93px !important;
+        }
+        #bottom{
+            height:220px !important;
+        }
         select{
             margin-right:10px;
         }
@@ -42,76 +51,82 @@
 </th:block>
 
 <div layout:fragment="content">
+    <div class="section" style="width:1000px;margin:50px auto;min-height:550px;">
+        <h2><b>전체</b> 상품보기</h2>
 
-    <form th:action="@{'/admin/goods-list/' + ${pageInfo.number}}" role="form" method="get" th:object="${pageInfo}">
-        <table class="table">
-            <thead>
-            <tr>
-                <td>상품아이디</td>
-                <td>상품명</td>
-                <td>상태</td>
-                <td>등록자</td>
-                <td>등록일</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="goods,status : ${pageInfo.getContent()}">
-                <td th:text="${goods.id}"></td>
-                <td>
-                    <a th:href="'/admin/goods/' + ${goods.id}" th:text="${goods.goodsName}"></a>
-                </td>
-                <td th:text="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL} ? '판매중' : '품절'"></td>
-                <td th:text="${goods.createdBy}"></td>
-                <td th:text="${goods.regTime}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <form th:action="@{'/admin/goods-list/' + ${pageInfo.number}}" role="form" method="get" th:object="${pageInfo}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>상품아이디</td>
+                    <td>상품명</td>
+                    <td>상태</td>
+                    <td>등록자</td>
+                    <td>등록일</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="goods,status : ${pageInfo.getContent()}">
+                    <td th:text="${goods.id}"></td>
+                    <td>
+                        <a th:href="'/admin/goods/' + ${goods.id}" th:text="${goods.goodsName}"></a>
+                    </td>
+                    <td th:text="${goods.goodsSellStatus == T(com.example.giftshop.goods.constant.GoodsSellStatus).SELL} ? '판매중' : '품절'"></td>
+                    <td th:text="${goods.createdBy}"></td>
+                    <td th:text="${goods.regTime}"></td>
+                </tr>
+                </tbody>
+            </table>
 
-        <div th:with="start=${(pageInfo.number/maxPage) * maxPage + 1}, end=(${ (pageInfo.totalPages == 0) ? 1 : (start + (maxPage - 1) < pageInfo.totalPages ? start + (maxPage - 1) : pageInfo.totalPages)})" >
-            <ul class="pagination justify-content-center">
+            <div id="pagination" style="margin-bottom:20px;" th:with="start=${(pageInfo.number/maxPage)*maxPage + 1},
+                                end=(${(pageInfo.totalPages == 0) ? 1 : (start + (maxPage - 1) < pageInfo.totalPages ? start + (maxPage - 1) : pageInfo.totalPages)})">
+                <ul class="page_wrap">
+                    <!-- 이전버튼 -->
+                    <li class="skip" th:classappend="${pageInfo.number eq 0} ? 'disabled' : ''">
+                        <a th:href="@{'/' + '?searchQuery=' + ${goodsSearchDTO.searchQuery} + '&page=' + ${pageInfo.number - 1}}">
+                            <span>이전</span>
+                        </a>
+                    </li>
 
-                <li class="page-item" th:classappend="${pageInfo.first}?'disabled'">
-                    <a th:onclick="'javascript:page(' + ${pageInfo.number - 1} + ')'" aria-label='Previous' class="page-link">
-                        <span aria-hidden='true'>Previous</span>
-                    </a>
-                </li>
+                    <!-- 넘버링버튼 for문 -->
+                    <li th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${pageInfo.number eq (page - 1)} ? 'active' : ''">
+                        <a th:href="@{'/goods/goods-list' +'?searchQuery=' + ${goodsSearchDTO.searchQuery} + '&page=' + ${page - 1}}" th:inline="text">[[${page}]]</a>
+                    </li>
 
-                <li class="page-item" th:each="page : ${#numbers.sequence(start,end)}" th:classappend="${pageInfo.number eq (page - 1)} ? 'active' : ''">
-                    <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
-                </li>
 
-                <li class="page-item" th:classappend="${pageInfo.last}?'disabled'">
-                    <a th:onclick="'javascript:page(' + ${pageInfo.number + 1} + ')'" aria-label='Next' class="page-link">
-                        <span aria-hidden='true'>Next</span>
-                    </a>
-                </li>
+                    <!-- 다음버튼 -->
+                    <li class="page-item" th:classappend="${pageInfo.number + 1 ge pageInfo.totalPages} ? 'disabled' : ''">
+                        <a th:href="@{'/' +'?searchQuery=' + ${goodsSearchDTO.searchQuery} + '&page=' + ${pageInfo.number+1}}">
+                            <span>다음</span>
+                        </a>
+                    </li>
 
-            </ul>
-        </div>
+                </ul>
+            </div>
 
-        <div class="form-inline justify-content-center" th:object="${goodsSearchDTO}">
-            <select th:field="*{searchDateType}" class="form-control" style="width:auto;">
-                <option value="all">전체기간</option>
-                <option value="1d">1일</option>
-                <option value="1w">1주</option>
-                <option value="1m">1개월</option>
-                <option value="6m">6개월</option>
-            </select>
-            <select th:field="*{searchSellStatus}" class="form-control" style="width:auto;">
-                <option value="">판매상태(전체)</option>
-                <option value="SELL">판매</option>
-                <option value="SOLD_OUT">품절</option>
-                <option value="READY">준비중</option>
-            </select>
-            <select th:field="*{searchBy}" class="form-control" style="width:auto;">
-                <option value="itemNm">상품명</option>
-                <option value="createdBy">카테고리</option>
-            </select>
-            <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
-            <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
-        </div>
-    </form>
-
+            <div class="form-inline justify-content-center" th:object="${goodsSearchDTO}">
+                <select th:field="*{searchDateType}" class="form-control" style="width:auto;">
+                    <option value="all">전체기간</option>
+                    <option value="1d">1일</option>
+                    <option value="1w">1주</option>
+                    <option value="1m">1개월</option>
+                    <option value="6m">6개월</option>
+                </select>
+                <select th:field="*{searchSellStatus}" class="form-control" style="width:auto;">
+                    <option value="">판매상태(전체)</option>
+                    <option value="SELL">판매</option>
+                    <option value="SOLD_OUT">품절</option>
+                    <option value="READY">준비중</option>
+                </select>
+                <select th:field="*{searchBy}" class="form-control" style="width:auto;">
+                    <option value="itemNm">상품명</option>
+                    <option value="createdBy">카테고리</option>
+                </select>
+                <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
+                <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+            </div>
+        </form>
+    </div>
 
 </div>
 
