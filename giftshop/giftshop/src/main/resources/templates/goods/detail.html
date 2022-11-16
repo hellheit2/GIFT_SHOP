@@ -25,6 +25,16 @@
             $("#count").change( function(){
                 calculateToalPrice();
             });
+
+            let dtl_list = document.getElementsByClassName("goods-summery");
+            console.log(dtl_list[0].innerHTML);
+            let temp = dtl_list[0].innerHTML;
+
+            console.log(temp);
+
+            for(let i = 0; i < dtl_list.length; i++){
+                dtl_list[i].innerText = temp;
+            }
         });
 
         function calculateToalPrice(){
@@ -142,7 +152,7 @@
                         <span th:text="${goods.goodsPrice}">1</span><span>원</span>
                         <!--<span class="text-decoration-line-through">(원래 상품가격)</span>-->
                     </div>
-                    <p class="lead goods-summery" th:text="${goods.goodsDetail}">상품 상세 설명</p>
+                    <p class="lead goods-summery" th:text="${goods.goodsDetail}" style="text-align:center;">상품 상세 설명</p>
                     <div class="input-group-prepend goods-count">
                         <span>수량</span>
                         <input type="number" name="count" id="count" class="form-control" value="1" min="1">
@@ -176,7 +186,7 @@
             <input id="qna_tab" type="radio" name="tab_item">
             <label class="tab_item" for="qna_tab">Q & A</label>
             <div class="tab_content" id="all_content">
-                <p class="lead" th:text="${goods.goodsDetail}">상품 상세 설명</p>
+                <p class="lead goods-summery" th:text="${goods.goodsDetail}">상품 상세 설명</p>
                 <div th:each="goodsImg : ${goods.goodsImageList}" class="text-center">
                     <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}" th:src="${goodsImg.imgUrl}" class="rounded mgb-15" width="700">
                 </div>
