@@ -39,9 +39,9 @@ public class SecurityConfig {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout")) //로그아웃 페이지
                 .logoutSuccessUrl("/"); //로그아웃 성공시 이동
 
-        http.authorizeRequests()
-                .mvcMatchers("/", "/members/**","/goods/**","/images/**").permitAll()
-                .mvcMatchers("/admin/**").hasRole("ADMIN")
+        http.authorizeRequests() //페이지별 권한 설정
+                .mvcMatchers("/", "/members/**","/goods/**","/images/**").permitAll() //메인, 회원, 상품, 이미지 관련 페이지 권한 x
+                .mvcMatchers("/admin/**").hasRole("ADMIN") //관리자 페이지 권한 확인
                 .anyRequest().authenticated();
 
         //인증되지 않은 사용자 접근
