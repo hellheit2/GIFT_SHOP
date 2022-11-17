@@ -18,4 +18,8 @@ public interface OrdersRepository extends JpaRepository<Orders,Long> {
     @Query("select count(o) from Orders o " +
             "where o.member.email = :email")
     Long countOrder(@Param("email") String email); //주문 총 개수
+
+    @Query("select count(o) from Orders o " +
+            "where o.member.email = :email and o.orderStatus='CANCEL'")
+    Long countOrderCancel(@Param("email") String email); //취소 주문 개수
 }

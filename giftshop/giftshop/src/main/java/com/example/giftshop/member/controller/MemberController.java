@@ -1,16 +1,17 @@
 package com.example.giftshop.member.controller;
 
+import com.example.giftshop.member.dto.MemberActiveDTO;
 import com.example.giftshop.member.dto.MemberFormDTO;
 import com.example.giftshop.member.entity.Member;
 import com.example.giftshop.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -64,5 +65,13 @@ public class MemberController {
     public String loginError(Model model){
         model.addAttribute("loginErrorMsg", "아이디 비밀번호를 확인해주세요");
         return "member/loginform";
+    }
+
+    @GetMapping(value = "/mypage")
+    public String myPage(Principal principal, Model model){
+
+        MemberActiveDTO memberActiveDTO = memberService.getMemberActive(principal.getName());
+        model.addAttribute("memberActiveDTO", memberActiveDTO);
+        return "member/mypage";
     }
 }

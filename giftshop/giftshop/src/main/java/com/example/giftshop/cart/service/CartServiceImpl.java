@@ -7,6 +7,7 @@ import com.example.giftshop.cart.entity.Cart;
 import com.example.giftshop.cart.entity.CartGoods;
 import com.example.giftshop.cart.repository.CartGoodsRepository;
 import com.example.giftshop.cart.repository.CartRepository;
+import com.example.giftshop.common.exception.OutOfStockException;
 import com.example.giftshop.goods.entity.Goods;
 import com.example.giftshop.goods.repository.GoodsRepository;
 import com.example.giftshop.member.entity.Member;
@@ -43,6 +44,11 @@ public class CartServiceImpl implements CartService {
         if(cart == null){ //장바구니 없을 경우(첫 장바구니)
             cart = Cart.createCart(member); //장바구니 생성
             cartRepository.save(cart); //저장
+        }
+
+        if(goods.getGoodsStock() < cartGoodsDTO.getCount()){
+            throw new OutOfStockException("상품의 재고가 부족합니다." +
+                    "(현재 재고 수량 : " + goods.getGoodsStock() + ")");
         }
 
         CartGoods savedCartGoods = cartGoodsRepository.findByCartIdAndGoodsId(cart.getId(), goods.getId()); //장바구니 확인

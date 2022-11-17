@@ -91,10 +91,9 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <div id="pagination" style="margin-bottom:20px;" th:with="start=${(orders.number / maxPage) * maxPage + 1},
+    <div id="pagination" style="margin-bottom:20px;clear:both;" th:with="start=${(orders.number / maxPage) * maxPage + 1},
                                                               end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})">
       <ul class="page_wrap">
         <!-- 이전버튼 -->
@@ -119,7 +118,6 @@
 
       </ul>
     </div>
-
   </div>
 </div>
 

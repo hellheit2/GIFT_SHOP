@@ -59,23 +59,26 @@
               <li><a href="#">자주하는 질문</a></li>
             </ul>-->
           </li>
-          <li><a href="#">마이페이지</a>
-           <!-- <ul class="sub">
-              <li><a th:href="@{/cart}">장바구니</a></li>
-              <li><a href="#">주문배송</a></li>
-              <li><a href="#">관심 상품</a></li>
-              <li><a href="#">쿠폰 등록</a></li>
-            </ul>-->
-          </li>
         </ul>
       </nav><!--main_navi-->
+
+
       <div class="q_join">
         <ul class="q_join_wrap">
           <li sec:authorize="isAuthenticated()"><a th:href="@{/members/logout}">LOGOUT</a></li>
-          <li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">CART</a></li>
+          <li sec:authorize="isAuthenticated()"><a th:href="@{/members/mypage}">MY</a></li>
           <li sec:authorize="isAnonymous()"><a th:href="@{/members/login}">LOGIN</a></li>
           <li sec:authorize="isAnonymous()"><a th:href="@{/members/join}">JOIN</a></li>
         </ul><!--join-->
+      </div>
+
+      <div class="search-box">
+        <form th:action="@{/goods/goods-list}" method="get">
+          <input class="search-txt" name="searchQuery" type="text" placeholder="검색어를 입력해 주세요">
+          <button class="search-btn" type="submit">
+            <img th:src="@{/img/search.png}" alt="검색"width="15" height="15">
+          </button>
+        </form>
       </div>
     </header><!--top_wrap-->
   </div>

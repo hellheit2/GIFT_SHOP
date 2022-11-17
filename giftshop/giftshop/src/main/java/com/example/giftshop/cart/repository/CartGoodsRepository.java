@@ -20,4 +20,6 @@ public interface CartGoodsRepository extends JpaRepository<CartGoods, Long> {
             "and img.repImgYn = 'Y' " + //대표 이미지만 필터
             "order by cg.regTime desc") //등록일 내림차순(최근 주문 위로)
     List<CartDetailDTO> findCartDetailDTOList(Long cartId);
+
+    Long countByCartId(Long cartId); //장바구니 상품 개수
 }

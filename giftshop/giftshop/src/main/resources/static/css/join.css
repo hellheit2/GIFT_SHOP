@@ -3,7 +3,7 @@
 
 #join_wrap{
     clear:both;
-    margin:100px auto 0 auto;
+    margin:50px auto 0 auto;
     width:800px;
 }
 #join_wrap h3{
@@ -19,12 +19,13 @@
 }
 #join_wrap h3 span::before{
     content:"";
-    width:4px;
-    height:14px;
+    width:5px;
+    height:15px;
     border-radius:5px;
     background-color:#666666;
     position:absolute;
     left:-9px;
+    top:15px;
 }
 
 #join_wrap > p{
@@ -54,8 +55,15 @@
     background-color:#666666;
     position:absolute;
     left:-9px;
+    top:6px;
 }
 .fieldError{
+    float:left;
+    padding-left:20px;
+    padding-top:20px;
+}
+.err_pwd{
+    float:left;
     padding-left:20px;
     padding-top:14px;
 }
@@ -142,6 +150,7 @@
     background-color:#666666;
     position:absolute;
     left:-9px;
+    top:6px;
 }
 
 .line2{
@@ -237,12 +246,15 @@
 }
 #l_order > ol > li:nth-child(3) > .search_btn,
 #r_order > ol > li:nth-child(3) > .search_btn{
+    float:right;
     border:1px solid #999999;
     border-radius:3px;
     width:100px;
     height:30px;
     margin-top:10px;
+    margin-left: 0;
 }
+
 #l_order > ol > li:nth-child(4) > input,
 #r_order > ol > li:nth-child(4) > input{
     width:250px;

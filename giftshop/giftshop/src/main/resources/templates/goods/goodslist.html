@@ -5,7 +5,15 @@
 
 <!-- CSS 추가 -->
 <th:block layout:fragment="css">
-
+  <style>
+    .search-result{
+      float:left;
+      width:400px;
+      height:100px;
+      line-height:90px;
+      font-size:18px;
+    }
+  </style>
 </th:block>
 
 !-- JS 추가 -->
@@ -17,7 +25,14 @@
 
   <div class="section main_hot" style="background-color:#ffffff;">
     <div class="hot_items">
-      <h2><b>전체</b> 상품보기</h2>
+      <h2 th:if="${#strings.isEmpty(goodsSearchDTO.searchQuery)}"><b>전체</b> 상품보기</h2>
+      <h2 th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}"><b>검색</b> 상품보기</h2>
+
+      <input type="hidden" name="searchQuery" th:value="${goodsSearchDTO.searchQuery}">
+      <div th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}" class="center">
+        <p class="search-result" th:text="'&#34;' + ${goodsSearchDTO.searchQuery} + '&#34; 검색 결과 (총 : ' + ${pageInfo.getContent().size()} + '건)'"></p>
+      </div>
+
 
       <ul class="product_list">
         <th:block th:each="goods, status: ${pageInfo.getContent()}">
@@ -40,10 +55,6 @@
     </div><!--hot_items-->
   </div><!--section main_hot-->
 
-  <input type="hidden" name="searchQuery" th:value="${goodsSearchDTO.searchQuery}">
-  <div th:if="${not #strings.isEmpty(goodsSearchDTO.searchQuery)}" class="center">
-    <p class="h3 font-weight-bold" th:text="${goodsSearchDTO.searchQuery} + '검색 결과'"></p>
-  </div>
 
   <div id="pagination" th:with="start=${(pageInfo.number/maxPage)*maxPage + 1},
                                 end=(${(pageInfo.totalPages == 0) ? 1 : (start + (maxPage - 1) < pageInfo.totalPages ? start + (maxPage - 1) : pageInfo.totalPages)})">

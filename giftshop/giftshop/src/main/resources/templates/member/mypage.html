@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<!-- CSS 추가 -->
+<th:block layout:fragment="css">
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+  <link rel="stylesheet" th:href="@{/css/mypage.css}">
+</th:block>
+
+<!-- JS 추가 -->
+<th:block layout:fragment="script">
+
+</th:block>
+
+<div layout:fragment="content">
+  <div class="section" style="width:1000px;min-width:1000px;margin:50px auto;">
+    <h2><b>주문/배송</b> 조회</h2>
+    <div class="wrap" style="clear:both;">
+      <div class="shipping-wrap">
+        <div class="title">
+          주문/배송조회
+        </div>
+        <div class="status">
+
+          <div class="my-con">
+            <div>
+              <div class="number" th:text="${memberActiveDTO.cart}">0</div>
+              <div class="text">장바구니</div>
+            </div>
+            <div class="icon"><img th:src="@{/img/my_arrow.png}" alt="#" width="30" height="30"></div>
+          </div>
+          <div class="my-con">
+            <div>
+              <div class="number" th:text="${memberActiveDTO.total}">0</div>
+              <div class="text">주문내역</div>
+            </div>
+            <div class="icon"><img th:src="@{/img/my_arrow.png}" alt="#" width="30" height="30"></div>
+          </div>
+          <div class="my-con">
+            <div>
+              <div class="number" th:text="${memberActiveDTO.canceled}">0</div>
+              <div class="text">주문취소</div>
+            </div>
+            <div class="icon"><img th:src="@{/img/my_arrow.png}" alt="#" width="30" height="30"></div>
+          </div>
+          <div class="my-con">
+            <div>
+              <div class="number">0</div>
+              <div class="text">배송중</div>
+            </div>
+            <div class="icon"><img th:src="@{/img/my_arrow.png}" alt="#" width="30" height="30"></div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="list-wrap">
+        <a th:href="@{/cart}" class="my-con">
+          <div class="icon">▶</div>
+          <div class="text">장바구니</div>
+        </a>
+        <a th:href="@{/orders}" class="my-con">
+          <div class="icon">▶</div>
+          <div class="text">주문내역</div>
+        </a>
+        <a href="#" class="my-con">
+          <div class="icon">▶</div>
+          <div class="text">상품후기</div>
+        </a>
+        <a href="#" class="my-con">
+          <div class="icon">▶</div>
+          <div class="text">상품문의</div>
+        </a>
+        <a href="#" class="my-con">
+          <div class="icon">▶</div>
+          <div class="text">찜한상품</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</html>

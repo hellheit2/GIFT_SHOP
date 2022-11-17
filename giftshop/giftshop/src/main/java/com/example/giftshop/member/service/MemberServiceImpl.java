@@ -1,12 +1,15 @@
 package com.example.giftshop.member.service;
 
-import com.example.giftshop.member.dto.MemberFormDTO;
+import com.example.giftshop.cart.entity.Cart;
+import com.example.giftshop.cart.repository.CartGoodsRepository;
+import com.example.giftshop.cart.repository.CartRepository;
+import com.example.giftshop.member.dto.MemberActiveDTO;
 import com.example.giftshop.member.entity.Member;
 import com.example.giftshop.member.repository.MemberRepository;
+import com.example.giftshop.orders.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
+    private final CartRepository cartRepository;
+    private final CartGoodsRepository cartGoodsRepository;
+    private final OrdersRepository ordersRepository;
 
     @Override
     public Member joinMember(Member member) {
@@ -59,4 +65,22 @@ public class MemberServiceImpl implements MemberService {
                 .roles(member.getRole().toString())
                 .build();
     }
+    @Override
+    public MemberActiveDTO getMemberActive(String email){
+
+        Member member = memberRepository.findByEmail(email); //회원 정보
+
+        Cart cart = cartRepository.findByMemberId(member.getId()); //회원 장바구니
+
+        Long cartCount = cartGoodsRepository.countByCartId(cart.getId()); //장바구니 개수
+        Long totalCount = ordersRepository.countOrder(email); //주문 총 개수
+        Long canceled = ordersRepository.countOrderCancel(email); //주문 취소
+
+        return MemberActiveDTO.builder()
+                .cart(cartCount)
+                .total(totalCount)
+                .canceled(canceled).build();
+
+    }
+
 }

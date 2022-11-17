@@ -38,7 +38,6 @@
 .main_slider{
     height:480px;
     position:relative;
-    z-index:-100;
 }
 .banner-slider{
     margin:0 auto;
