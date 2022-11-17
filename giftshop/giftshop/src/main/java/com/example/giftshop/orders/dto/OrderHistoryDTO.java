@@ -26,7 +26,7 @@ public class OrderHistoryDTO {
     }
 
     //주문 상품리스트
-    public void addOrderItemDto(OrderGoodsDTO orderGoodsDTO){ //주문 상품 리스트에 항목 추가
+    public void addOrderGoodsDto(OrderGoodsDTO orderGoodsDTO){ //주문 상품 리스트에 항목 추가
         orderGoodsDTOList.add(orderGoodsDTO);
     }
 }

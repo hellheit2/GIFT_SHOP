@@ -20,24 +20,22 @@
     <script th:inline="javascript">
         $(document).ready(function(){
 
-            calculateToalPrice();
+            calculateTotalPrice();
 
             $("#count").change( function(){
-                calculateToalPrice();
+                calculateTotalPrice();
             });
 
             let dtl_list = document.getElementsByClassName("goods-summery");
-            console.log(dtl_list[0].innerHTML);
-            let temp = dtl_list[0].innerHTML;
 
-            console.log(temp);
+            let temp = dtl_list[0].innerHTML;
 
             for(let i = 0; i < dtl_list.length; i++){
                 dtl_list[i].innerText = temp;
             }
         });
 
-        function calculateToalPrice(){
+        function calculateTotalPrice(){
             let count = $("#count").val();
             let price = $("#price").val();
             let totalPrice = price*count;
@@ -187,8 +185,8 @@
             <label class="tab_item" for="qna_tab">Q & A</label>
             <div class="tab_content" id="all_content">
                 <p class="lead goods-summery" th:text="${goods.goodsDetail}" style="text-align:center;">상품 상세 설명</p>
-                <div th:each="goodsImg : ${goods.goodsImageList}" class="text-center">
-                    <img th:if="${not #strings.isEmpty(goodsImg.imgUrl)}" th:src="${goodsImg.imgUrl}" class="rounded mgb-15" width="700">
+                <div th:each="num : ${#numbers.sequence(1, goods.goodsImageList.size() - 1)}" class="text-center">
+                    <img th:if="${not #strings.isEmpty(goods.goodsImageList[num].imgUrl)}" th:src="${goods.goodsImageList[num].imgUrl}" class="rounded mgb-15" width="700">
                 </div>
             </div>
             <div class="tab_content" id="review_tab_content">

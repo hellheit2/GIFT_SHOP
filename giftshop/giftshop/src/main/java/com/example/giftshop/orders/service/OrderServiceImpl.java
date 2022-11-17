@@ -69,7 +69,7 @@ public class OrderServiceImpl implements OrderService{
                         .findByGoodsIdAndRepImgYn(orderGoods.getGoods().getId(), "Y"); //대표 이미지 조회
                 OrderGoodsDTO orderGoodsDTO =
                         new OrderGoodsDTO(orderGoods, goodsImage.getImgUrl()); //주문상품 DTO 생성
-                orderHistoryDTO.addOrderItemDto(orderGoodsDTO); //주문 이력에 추가
+                orderHistoryDTO.addOrderGoodsDto(orderGoodsDTO); //주문 이력에 추가
             }
             orderHistoryDTOList.add(orderHistoryDTO); //주문이력 리스트에 추가
         }

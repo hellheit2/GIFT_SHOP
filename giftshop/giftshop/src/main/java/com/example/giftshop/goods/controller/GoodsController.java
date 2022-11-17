@@ -132,7 +132,7 @@ public class GoodsController {
                               @PathVariable("page") Optional<Integer> page,
                               Model model){
         //페이지가 존재할 경우 해당 페이지(page.get()), 아닐 경우 0
-        Pageable pageable = PageRequest.of(page.isPresent()? page.get() : 0, 16);
+        Pageable pageable = PageRequest.of(page.isPresent()? page.get() : 0, 12);
 
         Page<GoodsWrapDTO> pageInfo = goodsService.getAllGoodsList(goodsSearchDTO, pageable); //Page 객체
 
